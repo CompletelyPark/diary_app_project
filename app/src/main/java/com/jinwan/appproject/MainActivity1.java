@@ -13,7 +13,7 @@ import java.util.Date;
 public class MainActivity1 extends AppCompatActivity {
     long mnow;
     Date mdate;
-    SimpleDateFormat mformat = new SimpleDateFormat("yy-MM-dd");
+    SimpleDateFormat mformat = new SimpleDateFormat("M월 d일");
 
     TextView textView;
 
