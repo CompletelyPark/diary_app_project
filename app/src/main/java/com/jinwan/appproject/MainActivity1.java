@@ -15,7 +15,6 @@ public class MainActivity1 extends AppCompatActivity {
     Date mdate;
     SimpleDateFormat mformat = new SimpleDateFormat("yy-MM-dd");
 
-
     TextView textView;
 
     @Override
