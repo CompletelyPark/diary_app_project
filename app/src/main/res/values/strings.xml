@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppProject</string>
     <string name="text_famous" translatable="false">글귀를 받아올 공간</string>
+    <string name="Setting">보기 설정</string>
 </resources>

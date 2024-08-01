@@ -3,10 +3,9 @@ package com.jinwan.appproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.android.material.button.MaterialButton;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +23,7 @@ public class MainActivity1 extends AppCompatActivity {
 
         textView = findViewById(R.id.txt_date);
         textView.setText(getTime());
+
     }
 
     private String getTime(){
@@ -31,4 +31,7 @@ public class MainActivity1 extends AppCompatActivity {
         mdate = new Date(mnow);
         return mformat.format(mdate);
     }
+
+
+
 }
