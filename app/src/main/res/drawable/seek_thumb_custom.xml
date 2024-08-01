@@ -1,0 +1,12 @@
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="false" >
+    <corners android:radius="12dp" />
+
+    <size
+        android:width="13dp"
+        android:height="13dp"/>
+
+    <!-- 투명한 색상 설정 -->
+    <solid android:color="@android:color/transparent" />
+</shape>
