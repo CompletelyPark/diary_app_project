@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -68,21 +70,21 @@ public class DailyDiary extends AppCompatActivity {
                 seekBarTxt.setText(progress+"");
 //              처음에 seekBarTxt.setText(progress); 로 적었다가 계속 꺼져서 문제점을 찾아봤다
 //              textview의 setText method는 String 객체로 집어 넣어 줘야 한다는 것을 알게 됐다
-
+                setBrightness(progress);
                 progressValue = progress;
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 Log.d("Tag","onStartTrackingTouch");
-                setChildViewsEnabled(drawerView,false);
+//                setChildViewsEnabled(drawerView,false);
             }
 
             @Override
 //          이 때 결과 값 받아와서 값 수정하기
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Log.d("Tag","onStopTrackingTouch: " + progressValue);
-                setChildViewsEnabled(drawerView,true);
+//                setChildViewsEnabled(drawerView,true);
 
             }
         });
@@ -94,6 +96,18 @@ public class DailyDiary extends AppCompatActivity {
         mnow = System.currentTimeMillis();
         mdate = new Date(mnow);
         return mformat.format(mdate);
+    }
+
+//  화면 밝기 조절
+    private void setBrightness(int value){
+        if(value<10)value = 10;
+        else if(value>100) value=100;
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.screenBrightness = (float)value/100;
+        getWindow().setAttributes(params);
+
+
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {

@@ -62,33 +62,45 @@
 
 
         </LinearLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:gravity="start"
-            >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="200dp"
-                android:layout_height="36dp"
-                android:max="100"
-                android:progress="50"
-                android:progressDrawable="@drawable/seek_bar_custom"
-                android:thumb="@drawable/seek_thumb_custom"
-                />
-
-            <TextView
-                android:id="@+id/seekBarTxt"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="145dp"
-                android:layout_marginTop="8dp"
-                android:text="value"
-                android:textStyle="bold" />
+                android:paddingTop="10dp"
+                android:gravity="start"
+                >
 
-        </FrameLayout>
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="200dp"
+                    android:layout_height="36dp"
+                    android:max="100"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/seek_bar_custom"
+                    android:thumb="@drawable/seek_thumb_custom"
+                    />
+
+                <TextView
+                    android:id="@+id/seekBarTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="145dp"
+                    android:layout_marginTop="8dp"
+                    android:text="value"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btn_auto_bright"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"/>
+
+        </LinearLayout>
+
 
 
         <LinearLayout
