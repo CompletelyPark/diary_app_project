@@ -4,8 +4,8 @@
     <corners android:radius="12dp" />
 
     <size
-        android:width="13dp"
-        android:height="13dp"/>
+        android:width="0dp"
+        android:height="0dp"/>
 
     <!-- 투명한 색상 설정 -->
     <solid android:color="@android:color/transparent" />

@@ -21,7 +21,7 @@ public class MainActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
 
-        textView = findViewById(R.id.txt_date);
+//        textView = findViewById(R.id.txt_date);
         textView.setText(getTime());
 
     }
