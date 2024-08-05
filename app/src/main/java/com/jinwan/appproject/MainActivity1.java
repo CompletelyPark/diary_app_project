@@ -10,10 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity1 extends AppCompatActivity {
-    long mnow;
-    Date mdate;
-    SimpleDateFormat mformat = new SimpleDateFormat("M월 d일");
-
     TextView textView;
 
     @Override
@@ -21,17 +17,8 @@ public class MainActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
 
-//        textView = findViewById(R.id.txt_date);
-        textView.setText(getTime());
-
+//      textView = findViewById(R.id.txt_date);
+        textView.setText(DateUtils.getCurrentDateFormatted());
     }
-
-    private String getTime(){
-        mnow = System.currentTimeMillis();
-        mdate = new Date(mnow);
-        return mformat.format(mdate);
-    }
-
-
 
 }

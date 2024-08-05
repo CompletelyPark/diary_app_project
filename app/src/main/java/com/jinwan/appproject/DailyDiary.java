@@ -3,40 +3,28 @@ package com.jinwan.appproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
-
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class DailyDiary extends AppCompatActivity {
-    long mnow;
-    Date mdate;
-    SimpleDateFormat mformat = new SimpleDateFormat("M월 d일");
-    TextView textView;
 
+    TextView timeText;
     private DrawerLayout drawerLayout;
     private View drawerView;
+    private SeekBar seekBarBrightness;
+    private SeekBar seekBarBrightness111;
+    private TextView textBright111;
 
-    private SeekBar seekBar;
-    private TextView seekBarTxt;
-
+    private TextView textBright;
     private Button btn_set_font_dialog;
+
+
 
 
     @Override
@@ -45,8 +33,8 @@ public class DailyDiary extends AppCompatActivity {
         setContentView(R.layout.activity_daily_diary);
 
 //      날짜 불러오기
-        textView = findViewById(R.id.txt_date3);
-        textView.setText(getTime());
+        timeText = findViewById(R.id.txt_date3);
+        timeText.setText(DateUtils.getCurrentDateFormatted());
 
 //      navigation menu open
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -60,63 +48,38 @@ public class DailyDiary extends AppCompatActivity {
         });
 
 //      seekbar set
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBarTxt = (TextView) findViewById(R.id.seekBarTxt);
+        seekBarBrightness = (SeekBar) findViewById(R.id.seekBarBright);
+        textBright = (TextView) findViewById(R.id.textBright);
+        seekBarBrightness.setOnSeekBarChangeListener(new SeekBarBrightness(textBright));
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressValue=0;
+        seekBarBrightness111 = (SeekBar) findViewById(R.id.seekBarBright111);
+        textBright111 = (TextView) findViewById(R.id.textBright111);
+        seekBarBrightness111.setOnSeekBarChangeListener(new SeekBarBrightness(textBright111));
 
-            @Override
-//          이 때 숫자값 변경
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                drawerView.setVisibility(View.INVISIBLE);
-//                seekBar.setVisibility(View.VISIBLE);
-                Log.d("Tag","onProgressChanged: "+ progress);
-                seekBarTxt.setText(progress+"");
-//              처음에 seekBarTxt.setText(progress); 로 적었다가 계속 꺼져서 문제점을 찾아봤다
-//              textview의 setText method는 String 객체로 집어 넣어 줘야 한다는 것을 알게 됐다
-                setBrightness(progress);
-                progressValue = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                Log.d("Tag","onStartTrackingTouch");
-//                setChildViewsEnabled(drawerView,false);
-            }
-
-            @Override
-//          이 때 결과 값 받아와서 값 수정하기
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d("Tag","onStopTrackingTouch: " + progressValue);
-//                setChildViewsEnabled(drawerView,true);
-
-            }
-        });
 
 //      font dialog button
         btn_set_font_dialog = (Button) findViewById(R.id.btn_set_font_dialog);
 
-    }
-
-//  오늘 날짜를 불러오는 method
-    private String getTime(){
-        mnow = System.currentTimeMillis();
-        mdate = new Date(mnow);
-        return mformat.format(mdate);
-    }
-
-//  화면 밝기 조절
-    private void setBrightness(int value){
-        if(value<10)value = 10;
-        else if(value>100) value=100;
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.screenBrightness = (float)value/100;
-        getWindow().setAttributes(params);
 
 
     }
+
+
+
+    private class SeekBarBrightness extends CustomSeekBarChangeListener{
+           public SeekBarBrightness(TextView seekBarTxt){
+               super(seekBarTxt);
+               
+           }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            super.onProgressChanged(seekBar, progress, b);
+
+        }
+    }
+
+
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
         @Override
@@ -143,32 +106,12 @@ public class DailyDiary extends AppCompatActivity {
 
         }
     };
-
-    private void setChildViewsEnabled(View view, boolean enabled){
-        int x=0;
-
-        if(view instanceof ViewGroup){
-            ViewGroup group = (ViewGroup) view;
-            for(int i = 0; i<group.getChildCount();i++){
-                View child = group.getChildAt(i);
-                if (child.getId() == R.id.seekBar&&child.getId() == R.id.seekBarTxt)
-                    continue;
-                else {
-                    child.setEnabled(enabled);
-                    if (enabled == false) x = 4;
-                    else x = 0;
-//              Visible = 0, INVISIBLE = 4, GONE = 8
-
-                    child.setVisibility(x);
-                }
-            }
-        }
-    }
-
+    
+//  글꼴 선택할 수 있는 dialog button
     public void onClickDialog(View view){
-        final String[] items = {"Option 1", "Option 2", "Option 3"};
+        final String[] items = {"Option 1", "Option 2", "Option 3", "Option 4"};
         new AlertDialog.Builder(this)
-                .setTitle("Select an Option")
+                .setTitle("글꼴 설정")
                 .setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -179,6 +122,18 @@ public class DailyDiary extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", null) // 취소 버튼
                 .show();
+        }
     }
-    }
+/*
+  앱에서 설정에 접근하기 위해서 사용하는 방법은 SettingsProvider의 설정 항목을 쿼리해서 참조 할 수 있도록 만든 Settings 클래스를 이용하는 것
+  접근 단순화 해주는 class
+  public final class Settings extend Object
+  global - MultiUser 를 위한 공용 설정 데이터 접근 용도
+  Secure - 보안 관련한 설정 데이터 접근 용도
+  System - 시스템 과 관련한 설정 데이터 접근 용도
+  
+  밝기 조절 모드
+  int brightnessMode = Settings.System.getInt(getContentResolver(),
+                                                Settings.System.Screen_BRIGTNESS_MODE);
 
+*/
