@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,6 +35,8 @@ public class DailyDiary extends AppCompatActivity {
 
     private SeekBar seekBar;
     private TextView seekBarTxt;
+
+    private Button btn_set_font_dialog;
 
 
     @Override
@@ -88,6 +93,9 @@ public class DailyDiary extends AppCompatActivity {
 
             }
         });
+
+//      font dialog button
+        btn_set_font_dialog = (Button) findViewById(R.id.btn_set_font_dialog);
 
     }
 
@@ -156,4 +164,21 @@ public class DailyDiary extends AppCompatActivity {
             }
         }
     }
-}
+
+    public void onClickDialog(View view){
+        final String[] items = {"Option 1", "Option 2", "Option 3"};
+        new AlertDialog.Builder(this)
+                .setTitle("Select an Option")
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 항목을 클릭하면 호출됩니다.
+                        // 'which'는 사용자가 선택한 항목의 인덱스입니다.
+                        // 예: items[which]로 선택된 항목에 접근 가능
+                    }
+                })
+                .setNegativeButton("Cancel", null) // 취소 버튼
+                .show();
+    }
+    }
+
