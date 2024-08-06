@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:paddingTop="20dp"
         android:orientation="vertical"
         >
@@ -22,7 +22,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:paddingTop="15dp"
+        android:paddingTop="10dp"
         android:orientation="vertical"
         >
         <LinearLayout
@@ -135,6 +135,7 @@
             android:gravity="center"
             />
 
+
     </LinearLayout>
 
     <LinearLayout
@@ -180,8 +181,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_set_font_dialog"
-                android:layout_width="230dp"
-                android:layout_height="40dp"
+                android:layout_width="247dp"
+                android:layout_height="45dp"
                 android:background="@drawable/buttonshape"
                 android:drawableLeft="@android:drawable/btn_dialog"
                 android:drawableRight="@android:drawable/arrow_down_float"
@@ -192,14 +193,16 @@
         </LinearLayout>
 
         <FrameLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
+
             android:layout_weight="1"
             >
 
             <SeekBar
-                android:id="@+id/seekBarBrightness"
+                android:id="@+id/seekBar_textSize"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:max="100"
@@ -231,6 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
             android:paddingTop="5dp">
 
             <SeekBar
@@ -286,8 +290,9 @@
                 android:text="@string/UpDownPadding"
                 android:textStyle="bold" />
 
+            <!--현재 Updown 과 LeftRight는 모두 공간 자체와의 여백이다-->
             <TextView
-                android:id="@+id/SpaceUpDownPadding"
+                android:id="@+id/UpDownPadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -336,7 +341,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="100dp"
+        android:gravity="center"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="lock"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

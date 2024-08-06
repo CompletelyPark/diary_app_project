@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -32,11 +33,13 @@ public class DailyDiary extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
-    private SeekBar seekBarBrightness;
-    private TextView timeText,textBright;
-    private Button btn_set_font_dialog, btn_theme_dark;
+    private SeekBar seekBarBrightness, seekBar_textSize, seekBar_line_space_Extra, seekBar_UpDown_Padding, seekBar_LeftRight_Padding;
+    private TextView timeText, textBright, textSize, text_line_space, UpDownPadding, LeftRight_Padding;
+    private Button btn_set_font_dialog, btn_theme_dark, btn_auto_bright;
     private BrightnessManager brightnessManager;
 
+    private boolean ischangebtn = true;
+    private boolean isautobtn = true;
 
     @Override
     protected void onResume() {
@@ -71,6 +74,22 @@ public class DailyDiary extends AppCompatActivity {
         textBright = (TextView) findViewById(R.id.textBright);
         seekBarBrightness.setOnSeekBarChangeListener(new SeekBarBrightness(textBright));
 
+        seekBar_textSize = (SeekBar) findViewById(R.id.seekBar_textSize);
+        textSize = (TextView) findViewById(R.id.textSize);
+        seekBar_textSize.setOnSeekBarChangeListener(new SeekBarTextSize(textSize));
+
+        seekBar_line_space_Extra = (SeekBar) findViewById(R.id.seekBar_line_space_Extra);
+        text_line_space = (TextView) findViewById(R.id.text_line_space);
+        seekBar_line_space_Extra.setOnSeekBarChangeListener(new SeekBarTextSize(text_line_space));
+
+        seekBar_UpDown_Padding = (SeekBar) findViewById(R.id.seekBar_UpDown_Padding);
+        UpDownPadding = (TextView) findViewById(R.id.UpDownPadding);
+        seekBar_UpDown_Padding.setOnSeekBarChangeListener(new SeekBarTextSize(UpDownPadding));
+
+        seekBar_LeftRight_Padding = (SeekBar) findViewById(R.id.seekBar_LeftRight_Padding);
+        LeftRight_Padding = (TextView) findViewById(R.id.LeftRight_Padding);
+        seekBar_LeftRight_Padding.setOnSeekBarChangeListener(new SeekBarTextSize(LeftRight_Padding));
+
 //      font dialog button
         btn_set_font_dialog = (Button) findViewById(R.id.btn_set_font_dialog);
 
@@ -79,7 +98,16 @@ public class DailyDiary extends AppCompatActivity {
         btn_theme_dark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeTheme(AppCompatDelegate.MODE_NIGHT_YES);
+                changeTheme();
+            }
+        });
+
+//      bright auto setting button
+        btn_auto_bright = (Button) findViewById(R.id.btn_auto_bright);
+        btn_auto_bright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                autoBright();
             }
         });
 
@@ -114,11 +142,10 @@ public class DailyDiary extends AppCompatActivity {
         }
     }
 
-//  abstract seekbar change method
+//  Brightness Seekbar
     private class SeekBarBrightness extends CustomSeekBarChangeListener {
         public SeekBarBrightness(TextView seekBarTxt) {
             super(seekBarTxt);
-
         }
 
         @Override
@@ -128,9 +155,60 @@ public class DailyDiary extends AppCompatActivity {
         }
     }
 
+//  TextSize Seekbar
+    private class SeekBarTextSize extends CustomSeekBarChangeListener {
+        public SeekBarTextSize(TextView seekBarTxt) {
+            super(seekBarTxt);
+        }
 
-//  navigation drawer layout setting
-    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            super.onProgressChanged(seekBar, progress, b);
+
+        }
+    }
+
+//  LineSpaceExtra Seekbar
+    private class seekBar_line_space_Extra extends CustomSeekBarChangeListener {
+        public seekBar_line_space_Extra(TextView seekBarTxt) {
+            super(seekBarTxt);
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            super.onProgressChanged(seekBar, progress, b);
+
+        }
+    }
+
+//  UpDownPadding Seekbar
+    private class seekBar_UpDown_Padding extends CustomSeekBarChangeListener {
+        public seekBar_UpDown_Padding(TextView seekBarTxt) {
+            super(seekBarTxt);
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            super.onProgressChanged(seekBar, progress, b);
+
+        }
+    }
+
+//  LeftRightPadding Seekbar
+    private class seekBar_LeftRight_Padding	extends CustomSeekBarChangeListener {
+        public seekBar_LeftRight_Padding(TextView seekBarTxt) {
+            super(seekBarTxt);
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            super.onProgressChanged(seekBar, progress, b);
+
+        }
+    }
+
+    //  navigation drawer layout setting
+    DrawerLayout.DrawerListener listener = new androidx.drawerlayout.widget.DrawerLayout.DrawerListener() {
         @Override
 //      slide
         public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -166,25 +244,46 @@ public class DailyDiary extends AppCompatActivity {
                 .show();
     }
 
-//  theme change dark mode
-    private void changeTheme(int mode) {
-        AppCompatDelegate.setDefaultNightMode(mode);
+    //  theme change dark mode
+    private void changeTheme() {
+        if (ischangebtn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            ischangebtn = false;
+            Log.d("Tag","darkmode");
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            ischangebtn = true;
+            Log.d("Tag","lightmode");
+
+        }
     }
+
+    //  auto brightness
+    private void autoBright() {
+        //  auto brightness boolean
+        ContentResolver contentResolver = getContentResolver();
+
+        if (isautobtn){
+            Settings.System.putInt(
+                    contentResolver,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+            isautobtn = false;
+            Log.d("Tag","Automatic");
+        }
+        else{
+            Settings.System.putInt(
+                    contentResolver,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+            isautobtn = true;
+            Log.d("Tag","Manual");
+
+
+        }
+
+
+    }
+
 }
-
-
-
-
-/*
-  앱에서 설정에 접근하기 위해서 사용하는 방법은 SettingsProvider의 설정 항목을 쿼리해서 참조 할 수 있도록 만든 Settings 클래스를 이용하는 것
-  접근 단순화 해주는 class
-  public final class Settings extend Object
-  global - MultiUser 를 위한 공용 설정 데이터 접근 용도
-  Secure - 보안 관련한 설정 데이터 접근 용도
-  System - 시스템 과 관련한 설정 데이터 접근 용도
-  
-  밝기 조절 모드
-  int brightnessMode = Settings.System.getInt(getContentResolver(),
-                                                Settings.System.Screen_BRIGTNESS_MODE);
-
-*/
