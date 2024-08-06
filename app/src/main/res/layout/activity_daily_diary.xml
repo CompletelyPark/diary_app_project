@@ -70,33 +70,6 @@
                     android:hint="입력"
                     android:textSize="20sp"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:gravity="start"
-                    android:paddingStart="3dp"
-                    >
-
-                    <SeekBar
-                        android:id="@+id/seekBarBright111"
-                        android:layout_width="243dp"
-                        android:layout_height="40dp"
-                        android:max="100"
-                        android:progress="50"
-
-                        android:progressDrawable="@drawable/seek_bar_custom"
-                        android:thumb="@drawable/seek_thumb_custom" />
-
-                    <TextView
-                        android:id="@+id/textBright111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="170dp"
-                        android:layout_marginTop="9dp"
-                        android:text="value"
-                        android:textStyle="bold" />
-                </FrameLayout>
 
             </LinearLayout>
 
