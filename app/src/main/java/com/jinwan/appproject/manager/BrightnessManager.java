@@ -1,4 +1,4 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.manager;
 
 import android.content.ContentResolver;
 import android.provider.Settings;

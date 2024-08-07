@@ -1,4 +1,4 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.helper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

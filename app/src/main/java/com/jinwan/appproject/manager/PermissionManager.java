@@ -1,4 +1,4 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.manager;
 
 import android.app.Activity;
 import android.content.Intent;

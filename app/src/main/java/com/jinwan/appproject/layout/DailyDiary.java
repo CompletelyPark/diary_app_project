@@ -1,33 +1,30 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.layout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jinwan.appproject.helper.CustomSeekBarChangeListener;
+import com.jinwan.appproject.helper.DateUtils;
+import com.jinwan.appproject.R;
+import com.jinwan.appproject.manager.BrightnessManager;
+import com.jinwan.appproject.manager.PermissionManager;
 
 public class DailyDiary extends AppCompatActivity {
 
@@ -52,7 +49,7 @@ public class DailyDiary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_diary);
+        setContentView(R.layout.daily_diary);
 
 //      날짜 불러오기
         timeText = findViewById(R.id.txt_date3);

@@ -1,4 +1,4 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.helper;
 
 import android.util.Log;
 import android.widget.SeekBar;
