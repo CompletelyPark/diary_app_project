@@ -141,6 +141,8 @@
     <color name="md_theme_surfaceContainerHigh_highContrast">#E7E8EE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E2E2E9</color>
 
+
+
 <!--dark theme color-->
     <color name="md_theme_primary_dark">#AAC7FF</color>
     <color name="md_theme_onPrimary_dark">#0A305F</color>

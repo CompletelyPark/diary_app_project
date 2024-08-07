@@ -52,7 +52,6 @@ public class DailyDiary extends AppCompatActivity {
         setContentView(R.layout.daily_diary);
 
 //      날짜 불러오기
-        timeText = findViewById(R.id.txt_date3);
         timeText.setText(DateUtils.getCurrentDateFormatted());
 
 //      navigation menu open
