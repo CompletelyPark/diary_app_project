@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
 
-    private Button btn_month, btn_daily, btn_diary, btn_palette;
+    private Button btn_month, btn_daily, btn_diary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_palette = findViewById(R.id.btn_palette);
+
 
     }
     @Override
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.menu.menu_main) {
+        if (item.getItemId() == R.id.action_theme) {
             Intent intent = new Intent(this, ThemeChoice.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -96,13 +96,4 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-
-    public void onclickTheme(View view) {
-        Intent intent = new Intent(this,ThemeChoice.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-
-
-    }
 }

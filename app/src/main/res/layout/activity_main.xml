@@ -17,23 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-
-        <Button
-            android:id="@+id/btn_palette"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/palette"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:background="@android:color/transparent"
-            android:onClick="onclickTheme"
-            />
-
-
-
-    </androidx.appcompat.widget.Toolbar>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
