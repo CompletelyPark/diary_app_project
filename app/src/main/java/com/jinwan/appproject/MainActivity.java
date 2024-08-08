@@ -22,10 +22,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.fragment.MonthFragment;
+import com.jinwan.appproject.helper.BaseActivity;
+import com.jinwan.appproject.helper.ThemeUtils;
 import com.jinwan.appproject.layout.ThemeChoice;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
 

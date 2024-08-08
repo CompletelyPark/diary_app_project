@@ -20,13 +20,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.CustomSeekBarChangeListener;
 import com.jinwan.appproject.helper.DateUtils;
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.helper.ThemeUtils;
 import com.jinwan.appproject.manager.BrightnessManager;
 import com.jinwan.appproject.manager.PermissionManager;
 
-public class DailyDiary extends AppCompatActivity {
+public class DailyDiary extends BaseActivity {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -40,6 +42,7 @@ public class DailyDiary extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        ThemeUtils.applyTheme(this);
         super.onResume();
         if (PermissionManager.checkWriteSettingsPermission(this))
             brightnessManager.initBrightness(seekBarBrightness, textBright);
