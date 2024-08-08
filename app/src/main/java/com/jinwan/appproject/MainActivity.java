@@ -1,17 +1,10 @@
 package com.jinwan.appproject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
@@ -19,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.jinwan.appproject.fragment.CalendarFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
-import com.jinwan.appproject.fragment.MonthFragment;
 import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.ThemeUtils;
 import com.jinwan.appproject.layout.ThemeChoice;
@@ -44,13 +37,12 @@ public class MainActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
 
         // Load the default fragment
-        loadFragment(new MonthFragment());
 
         btn_month = findViewById(R.id.btn_month);
         btn_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new MonthFragment());
+                loadFragment(new CalendarFragment());
             }
         });
 
