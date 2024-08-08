@@ -1,12 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.AppProject" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="colorPrimaryDark">@color/md_theme_primary_dark</item>
-        <item name="colorButtonNormal">@color/md_theme_primaryContainer</item>
-        <item name="colorButtonDark">@color/md_theme_primaryContainer_dark</item>
-        <item name="android:windowBackground">@color/md_theme_background</item>
-        <item name="android:windowBackgroundDark">@color/md_theme_background_dark</item>
     </style>
-    <style name="Theme.AppProject" parent="Base.Theme.AppProject" />
 </resources>

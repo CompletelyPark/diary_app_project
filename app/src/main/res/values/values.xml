@@ -3,5 +3,4 @@
 <resources>
     <attr format="color" name = "colorButtonDark"/>
     <attr format="color" name = "windowBackgroundDark"/>
-
 </resources>
