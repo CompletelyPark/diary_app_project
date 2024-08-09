@@ -2,9 +2,7 @@ package com.jinwan.appproject.helper;
 
 import android.view.View;
 import android.widget.Button;
-
 import androidx.fragment.app.FragmentActivity;
-
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.fragment.CalendarFragment;

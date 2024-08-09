@@ -4,7 +4,6 @@ import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
 //  seekbar class create and abstract class set
 //  해당 함수는 여러 seekbar에서 사용할 수 있게 모듈화를 진행하고 추가로 추상 method 로 설정해
 //  원하는 기능을 구현해서 사용할 수 있도록 작성

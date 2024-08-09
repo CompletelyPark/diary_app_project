@@ -1,8 +1,8 @@
 package com.jinwan.appproject.recycler;// MyViewModel.java
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import java.util.List;
 
 public class MyViewModel extends ViewModel {

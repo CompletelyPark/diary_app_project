@@ -3,7 +3,6 @@ package com.jinwan.appproject.helper;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.jinwan.appproject.R;
 
 public class ThemeUtils {

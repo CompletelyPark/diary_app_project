@@ -1,11 +1,9 @@
-package com.jinwan.appproject.layout;
+package com.jinwan.appproject.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -19,7 +17,6 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.CustomSeekBarChangeListener;
 import com.jinwan.appproject.helper.DateUtils;
@@ -278,11 +275,6 @@ public class DailyDiary extends BaseActivity {
                     Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
             isautobtn = true;
             Log.d("Tag","Manual");
-
-
         }
-
-
     }
-
 }

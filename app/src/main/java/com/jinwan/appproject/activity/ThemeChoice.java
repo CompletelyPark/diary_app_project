@@ -1,15 +1,9 @@
-package com.jinwan.appproject.layout;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.jinwan.appproject.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.jinwan.appproject.MainActivity;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.ThemeUtils;
@@ -54,7 +48,7 @@ public class ThemeChoice extends BaseActivity {
         btn_theme4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThemeUtils.setTheme(ThemeChoice.this, R.style.Theme2FFC2E);
+                ThemeUtils.setTheme(ThemeChoice.this, R.style.ThemeFFDE3F);
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.jinwan.appproject;
+package com.jinwan.appproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,25 +6,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
+import com.jinwan.appproject.R;
 import com.jinwan.appproject.fragment.CalendarFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.helper.BaseActivity;
-import com.jinwan.appproject.helper.ThemeUtils;
-import com.jinwan.appproject.layout.ThemeChoice;
 
 
 public class MainActivity extends BaseActivity {
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
-
     private Button btn_month, btn_daily, btn_diary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +58,9 @@ public class MainActivity extends BaseActivity {
                 loadFragment(new DiaryFragment());
             }
         });
-
-
-
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
