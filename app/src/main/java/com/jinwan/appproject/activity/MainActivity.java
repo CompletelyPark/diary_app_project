@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.fragment.CalendarFragment;
+import com.jinwan.appproject.fragment.MainFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.helper.BaseActivity;
@@ -22,6 +23,8 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private Button btn_month, btn_daily, btn_diary;
 
+    private boolean ismain = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +32,27 @@ public class MainActivity extends BaseActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//      toolbar 의 title 비활성화
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         fragmentManager = getSupportFragmentManager();
 
         // Load the default fragment
+        loadFragment(new MainFragment());
 
         btn_month = findViewById(R.id.btn_month);
         btn_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new CalendarFragment());
+
+                if(ismain){
+                    loadFragment(new CalendarFragment());
+                    ismain = false;
+                }
+                else {
+                    loadFragment(new MainFragment());
+                    ismain = true;
+                }
             }
         });
 
@@ -47,7 +60,15 @@ public class MainActivity extends BaseActivity {
         btn_daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new DailyFragment());
+
+                if(ismain){
+                    loadFragment(new DailyFragment());
+                    ismain = false;
+                }
+                else {
+                    loadFragment(new MainFragment());
+                    ismain = true;
+                }
             }
         });
 
@@ -55,18 +76,28 @@ public class MainActivity extends BaseActivity {
         btn_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new DiaryFragment());
+
+                if(ismain){
+                    loadFragment(new DiaryFragment());
+                    ismain = false;
+                }
+                else {
+                    loadFragment(new MainFragment());
+                    ismain = true;
+                }
             }
         });
+
     }
 
-
+//  툴바 메뉴 활성화 method
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+//  테마 선택 activity 로 이동하는 method
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_theme) {
@@ -79,6 +110,7 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+//  fragment load method
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);

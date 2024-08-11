@@ -5,7 +5,7 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentActivity;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
-import com.jinwan.appproject.fragment.CalendarFragment;
+import com.jinwan.appproject.fragment.MainFragment;
 
 public class ButtonSetupHelper {
 
@@ -17,7 +17,7 @@ public class ButtonSetupHelper {
         btnMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentLoader.loadFragment(new CalendarFragment());
+                fragmentLoader.loadFragment(new MainFragment());
             }
         });
 
