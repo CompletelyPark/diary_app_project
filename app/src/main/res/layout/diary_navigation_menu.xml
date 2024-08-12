@@ -72,7 +72,6 @@
                 />
             <Button
                 style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                android:onClick="oncl"
                 android:id="@+id/btn_theme_dark"
                 android:layout_width="22dp"
                 android:layout_height="30dp"
