@@ -106,6 +106,12 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("Tag", "layout_schedule_clicked");
+                View dialogView1 = getLayoutInflater().inflate(R.layout.add_schedule, null);
+                builder.setTitle("일정 추가");
+                builder.setView(dialogView1);
+                builder.setPositiveButton("확인",null);
+                builder.setNegativeButton("취소", null);
+                builder.show();
             }
         });
 
@@ -114,6 +120,13 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("Tag", "layout_celebrity_clicked");
+                View dialogView2 = getLayoutInflater().inflate(R.layout.add_celebrity, null);
+                builder.setTitle("기념일 추가");
+                builder.setView(dialogView2);
+                builder.setNeutralButton("기념일 삭제",null);
+                builder.setPositiveButton("확인",null);
+                builder.setNegativeButton("취소", null);
+                builder.show();
             }
         });
 
