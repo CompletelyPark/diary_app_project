@@ -25,12 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ImageButton
-        android:id="@+id/btn_plus"
-        android:layout_width="91dp"
-        android:layout_height="68dp"
-        android:onClick="onclickDialog1"
-        android:src="@drawable/add_24px" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btn_plus"-->
+<!--        android:layout_width="91dp"-->
+<!--        android:layout_height="68dp"-->
+<!--        android:onClick="onclickDialog1"-->
+<!--        android:src="@drawable/add_24px" />-->
 
 
 </LinearLayout>
