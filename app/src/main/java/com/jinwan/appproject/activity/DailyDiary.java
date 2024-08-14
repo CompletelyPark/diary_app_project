@@ -52,7 +52,7 @@ public class DailyDiary extends BaseActivity {
         setContentView(R.layout.daily_diary);
 
 //      날짜 불러오기
-        timeText.setText(DateUtils.getCurrentDateFormatted());
+        timeText.setText(DateUtils.getCurrentDateFormattedMonthDay());
 
 //      navigation menu open
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

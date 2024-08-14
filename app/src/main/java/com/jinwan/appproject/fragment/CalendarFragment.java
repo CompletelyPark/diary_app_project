@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.timepicker.MaterialTimePicker;
 import com.jinwan.appproject.Data.Schedule;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.helper.DateUtils;
@@ -26,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,6 +50,9 @@ public class CalendarFragment extends Fragment {
 
     private boolean istf = true;
     private long selectedDate; // 선택한 날짜를 저장할 변수
+
+    TextView txt_dayfirst, txt_daylast, txt_timefirst, txt_timelast;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -100,15 +109,82 @@ public class CalendarFragment extends Fragment {
         View dialogView = getLayoutInflater().inflate(R.layout.schedule_add_dialog, null);
         builder.setView(dialogView);
 
-
         LinearLayout layout_schedule = dialogView.findViewById(R.id.layout_add_schedule);
         layout_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Tag", "layout_schedule_clicked");
                 View dialogView1 = getLayoutInflater().inflate(R.layout.add_schedule, null);
+
+                String dateString = sdf.format(selectedDate);
+
+                txt_dayfirst = dialogView1.findViewById(R.id.txt_dayfirst);
+                txt_dayfirst.setText(dateString);
+                txt_dayfirst.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.datePicker()
+                                .setSelection(selectedDate).build();
+                        materialDatePicker.show(getActivity().getSupportFragmentManager(), "Date_picker");
+
+                        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                            @Override
+                            public void onPositiveButtonClick(Long selection) {
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = new Date();
+                                date.setTime(selection);
+                                String dateString = simpleDateFormat.format(date);
+                                txt_dayfirst.setText(dateString);
+                            }
+                        });
+
+                    }
+                });
+
+                txt_daylast = dialogView1.findViewById(R.id.txt_daylast);
+                txt_daylast.setText(dateString);
+                txt_daylast.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.datePicker()
+                                .setSelection(selectedDate).build();
+                        materialDatePicker.show(getActivity().getSupportFragmentManager(), "Date_picker");
+
+                        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                            @Override
+                            public void onPositiveButtonClick(Long selection) {
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = new Date();
+                                date.setTime(selection);
+                                String dateString = simpleDateFormat.format(date);
+                                txt_daylast.setText(dateString);
+                            }
+                        });
+
+                    }
+                });
+
+                txt_timefirst = dialogView1.findViewById(R.id.txt_timefirst);
+                txt_timefirst.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MaterialTimePicker materialTimePicker = new MaterialTimePicker();
+                        materialTimePicker.show(getActivity().getSupportFragmentManager(),"Time_picker");
+                    }
+                });
+
+                txt_timelast = dialogView1.findViewById(R.id.txt_timelast);
+                txt_timelast.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+
                 builder.setTitle("일정 추가");
                 builder.setView(dialogView1);
+
                 builder.setPositiveButton("확인",null);
                 builder.setNegativeButton("취소", null);
                 builder.show();
