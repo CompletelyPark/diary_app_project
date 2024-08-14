@@ -30,8 +30,8 @@ public class DailyDiary extends BaseActivity {
     private DrawerLayout drawerLayout;
     private View drawerView;
     private SeekBar seekBarBrightness, seekBar_textSize, seekBar_line_space_Extra, seekBar_UpDown_Padding, seekBar_LeftRight_Padding;
-    private TextView timeText, textBright, textSize, text_line_space, UpDownPadding, LeftRight_Padding;
-    private Button btn_set_font_dialog, btn_theme_dark, btn_auto_bright;
+    private TextView textBright, textSize, text_line_space, UpDownPadding, LeftRight_Padding;
+    private Button btn_theme_dark, btn_auto_bright;
     private BrightnessManager brightnessManager;
 
     private boolean ischangebtn = true;
@@ -52,7 +52,7 @@ public class DailyDiary extends BaseActivity {
         setContentView(R.layout.daily_diary);
 
 //      날짜 불러오기
-        timeText.setText(DateUtils.getCurrentDateFormattedMonthDay());
+//        timeText.setText(DateUtils.getCurrentDateFormattedMonthDay());
 
 //      navigation menu open
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,7 +87,7 @@ public class DailyDiary extends BaseActivity {
         seekBar_LeftRight_Padding.setOnSeekBarChangeListener(new SeekBarTextSize(LeftRight_Padding));
 
 //      font dialog button
-        btn_set_font_dialog = (Button) findViewById(R.id.btn_set_font_dialog);
+//        btn_set_font_dialog = (Button) findViewById(R.id.btn_set_font_dialog);
 
 //      theme dark button set
         btn_theme_dark = (Button) findViewById(R.id.btn_theme_dark);

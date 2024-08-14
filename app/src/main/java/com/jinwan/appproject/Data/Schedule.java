@@ -1,35 +1,43 @@
 package com.jinwan.appproject.Data;
 
 public class Schedule {
-    private String title, date, time;
+    private String name;
+    private String memo;
+    private String dayFirst;
+    private String dayLast;
+    private String timeFirst;
+    private String timeLast;
 
-    public Schedule(String title, String date, String time) {
-        this.title = title;
-        this.date = date;
-        this.time = time;
+    public Schedule(String name, String memo, String dayFirst, String dayLast, String timeFirst, String timeLast) {
+        this.name = name;
+        this.memo = memo;
+        this.dayFirst = dayFirst;
+        this.dayLast = dayLast;
+        this.timeFirst = timeFirst;
+        this.timeLast = timeLast;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getMemo() {
+        return memo;
     }
 
-    public String getDate() {
-        return date;
+    public String getDayFirst() {
+        return dayFirst;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getDayLast() {
+        return dayLast;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimeFirst() {
+        return timeFirst;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getTimeLast() {
+        return timeLast;
     }
 }

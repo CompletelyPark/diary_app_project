@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.Data.Schedule;
@@ -13,23 +14,28 @@ import com.jinwan.appproject.R;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
-
     private List<Schedule> scheduleList;
 
     public ScheduleAdapter(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;
     }
 
+    @NonNull
     @Override
-    public ScheduleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_item, parent, false);
+    public ScheduleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_schedule, parent, false);
         return new ScheduleViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ScheduleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
         Schedule schedule = scheduleList.get(position);
-        holder.bind(schedule);
+        holder.name.setText(schedule.getName());
+        holder.memo.setText(schedule.getMemo());
+        holder.dayFirst.setText(schedule.getDayFirst());
+        holder.dayLast.setText(schedule.getDayLast());
+        holder.timeFirst.setText(schedule.getTimeFirst());
+        holder.timeLast.setText(schedule.getTimeLast());
     }
 
     @Override
@@ -37,22 +43,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         return scheduleList.size();
     }
 
-    static class ScheduleViewHolder extends RecyclerView.ViewHolder {
-        private TextView titleTextView;
-        private TextView dateTextView;
-        private TextView timeTextView;
+    public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
+        TextView name, memo, dayFirst, dayLast, timeFirst, timeLast;
 
-        public ScheduleViewHolder(View itemView) {
+        public ScheduleViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
-            timeTextView = itemView.findViewById(R.id.timeTextView);
-        }
-
-        public void bind(Schedule schedule) {
-            titleTextView.setText(schedule.getTitle());
-            dateTextView.setText(schedule.getDate());
-            timeTextView.setText(schedule.getTime());
+            name = itemView.findViewById(R.id.schedule_name);
+            memo = itemView.findViewById(R.id.schedule_memo);
+            dayFirst = itemView.findViewById(R.id.dayfirst);
+            dayLast = itemView.findViewById(R.id.daylast);
+            timeFirst = itemView.findViewById(R.id.timefirst);
+            timeLast = itemView.findViewById(R.id.timelast);
         }
     }
 }

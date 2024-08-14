@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
     
     <EditText
+        android:id="@+id/schedule_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:hint="일정 이름 입력"
         android:maxLength="15"
         />
@@ -25,7 +26,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txt_dayfirst"
+            android:id="@+id/dayfirst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -36,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_timefirst"
+            android:id="@+id/timefirst"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="Am 09:00"
@@ -59,7 +60,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txt_daylast"
+            android:id="@+id/daylast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -70,7 +71,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_timelast"
+            android:id="@+id/timelast"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="Am 10:00"
@@ -102,13 +103,13 @@
             />
 
         <EditText
+            android:id="@+id/schedule_memo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:hint="메모"
             android:background="@android:color/transparent"
             android:inputType="textMultiLine"
-
             />
 
     </LinearLayout>
