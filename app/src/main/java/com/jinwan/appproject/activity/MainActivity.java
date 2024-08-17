@@ -25,6 +25,10 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private Button btn_month, btn_daily, btn_diary;
 
+    private boolean ishome = true;
+    private boolean istheme = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,8 @@ public class MainActivity extends BaseActivity {
         btn_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ishome = true;
+                istheme = true;
                 loadFragment(new CalendarFragment());
             }
         });
@@ -55,6 +61,8 @@ public class MainActivity extends BaseActivity {
         btn_daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ishome = true;
+                istheme = true;
                 loadFragment(new DailyFragment());
             }
         });
@@ -63,6 +71,8 @@ public class MainActivity extends BaseActivity {
         btn_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ishome = true;
+                istheme = true;
                 loadFragment(new DiaryFragment());
             }
         });
@@ -79,14 +89,18 @@ public class MainActivity extends BaseActivity {
 //  테마 선택 activity 로 이동하는 method
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_theme) {
+        if (item.getItemId() == R.id.action_theme && istheme) {
+            ishome = true;
+            istheme = false;
             Intent intent = new Intent(this, ThemeChoice.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
             return true;
         }
-        else if(item.getItemId() == R.id.action_home){
+        else if(item.getItemId() == R.id.action_home && ishome){
+            ishome = false;
+            istheme = true;
             loadFragment(new MainFragment());
         }
         return super.onOptionsItemSelected(item);
