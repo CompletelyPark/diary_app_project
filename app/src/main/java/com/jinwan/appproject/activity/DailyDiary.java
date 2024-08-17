@@ -2,7 +2,7 @@ package com.jinwan.appproject.activity;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import com.jinwan.appproject.helper.BaseActivity;
+
 import com.jinwan.appproject.R;
 
 public class DailyDiary extends BaseActivity {

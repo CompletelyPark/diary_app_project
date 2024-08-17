@@ -1,4 +1,4 @@
-package com.jinwan.appproject.helper;
+package com.jinwan.appproject.dialog;
 
 import android.content.Context;
 import android.view.LayoutInflater;

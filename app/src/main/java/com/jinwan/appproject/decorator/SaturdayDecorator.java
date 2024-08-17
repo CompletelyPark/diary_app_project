@@ -1,4 +1,4 @@
-package com.jinwan.appproject.helper;
+package com.jinwan.appproject.decorator;
 
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
@@ -11,7 +11,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SundayDecorator implements DayViewDecorator {
+public class SaturdayDecorator implements DayViewDecorator {
     private final Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -23,7 +23,7 @@ public class SundayDecorator implements DayViewDecorator {
             Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             calendar.setTime(date);
             int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-            return weekDay == Calendar.SUNDAY;
+            return weekDay == Calendar.SATURDAY;
         }
         return false;
     }
@@ -31,7 +31,7 @@ public class SundayDecorator implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
         if (view != null) {
-            view.addSpan(new ForegroundColorSpan(Color.RED));
+            view.addSpan(new ForegroundColorSpan(Color.BLUE));
         }
     }
 }

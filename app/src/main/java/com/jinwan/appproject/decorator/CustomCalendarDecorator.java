@@ -1,4 +1,4 @@
-package com.jinwan.appproject.helper;
+package com.jinwan.appproject.decorator;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -40,7 +40,7 @@ public class CustomCalendarDecorator implements DayViewDecorator {
         // 배경 색상 설정
 //        view.setBackgroundDrawable(backgroundDrawable);
         // 날짜 텍스트 색상 설정
-        view.addSpan(new ForegroundColorSpan(dayTextColor));
+        // view.addSpan(new ForegroundColorSpan(dayTextColor));
     }
 
     public void decorateWeekday(DayViewFacade view) {

@@ -2,7 +2,6 @@ package com.jinwan.appproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +16,6 @@ import com.jinwan.appproject.fragment.CalendarFragment;
 import com.jinwan.appproject.fragment.MainFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
-import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.DateUtils;
 
 public class MainActivity extends BaseActivity {

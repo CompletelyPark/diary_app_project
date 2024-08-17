@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.helper.BaseActivity;
 import com.jinwan.appproject.helper.ThemeUtils;
 
 public class ThemeChoice extends BaseActivity {

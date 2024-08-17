@@ -1,7 +1,9 @@
-package com.jinwan.appproject.helper;
+package com.jinwan.appproject.activity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.jinwan.appproject.helper.ThemeUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
