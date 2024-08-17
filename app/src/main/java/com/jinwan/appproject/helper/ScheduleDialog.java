@@ -21,6 +21,7 @@ public class ScheduleDialog {
     private final ScheduleAdapter scheduleAdapter;
     private final long selectedDate;
     String dateString;
+
     public ScheduleDialog(Context context, List<Schedule> scheduleList, ScheduleAdapter scheduleAdapter, long selectedDate) {
         this.context = context;
         this.scheduleList = scheduleList;

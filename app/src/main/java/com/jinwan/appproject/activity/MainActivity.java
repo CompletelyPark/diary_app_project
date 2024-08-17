@@ -2,6 +2,8 @@ package com.jinwan.appproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +18,12 @@ import com.jinwan.appproject.fragment.MainFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.helper.BaseActivity;
-
+import com.jinwan.appproject.helper.DateUtils;
 
 public class MainActivity extends BaseActivity {
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
     private Button btn_month, btn_daily, btn_diary;
-
-    private boolean ismain = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,12 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
+        int colorOnPrimary = getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary);
+        toolbar.setTitleTextColor(colorOnPrimary);
+//        Log.d("jtag",colorOnPrimary+"");
+        toolbar.setTitle(DateUtils.getCurrentDateFormattedMonthDay());
+
         setSupportActionBar(toolbar);
-//      toolbar 의 title 비활성화
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -44,15 +47,7 @@ public class MainActivity extends BaseActivity {
         btn_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(ismain){
-                    loadFragment(new CalendarFragment());
-                    ismain = false;
-                }
-                else {
-                    loadFragment(new MainFragment());
-                    ismain = true;
-                }
+                loadFragment(new CalendarFragment());
             }
         });
 
@@ -60,15 +55,7 @@ public class MainActivity extends BaseActivity {
         btn_daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(ismain){
-                    loadFragment(new DailyFragment());
-                    ismain = false;
-                }
-                else {
-                    loadFragment(new MainFragment());
-                    ismain = true;
-                }
+                loadFragment(new DailyFragment());
             }
         });
 
@@ -76,15 +63,7 @@ public class MainActivity extends BaseActivity {
         btn_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(ismain){
-                    loadFragment(new DiaryFragment());
-                    ismain = false;
-                }
-                else {
-                    loadFragment(new MainFragment());
-                    ismain = true;
-                }
+                loadFragment(new DiaryFragment());
             }
         });
 
@@ -107,6 +86,9 @@ public class MainActivity extends BaseActivity {
             finish();
             return true;
         }
+        else if(item.getItemId() == R.id.action_home){
+            loadFragment(new MainFragment());
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -116,6 +98,13 @@ public class MainActivity extends BaseActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+//  색상 가져오는 method
+    private int getColorFromAttr(int attr) {
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(attr, typedValue, true);
+        return typedValue.data;
     }
 
 }

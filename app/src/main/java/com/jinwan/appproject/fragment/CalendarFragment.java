@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.helper.CustomCalendarDecorator;
+import com.jinwan.appproject.helper.TodayDecorator;
 import com.jinwan.appproject.schedule.Schedule;
 import com.jinwan.appproject.helper.SaturdayDecorator;
 import com.jinwan.appproject.helper.ScheduleDialog;
@@ -19,6 +21,8 @@ import com.jinwan.appproject.helper.SundayDecorator;
 import com.jinwan.appproject.schedule.ScheduleAdapter;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
@@ -87,9 +91,15 @@ public class CalendarFragment extends Fragment {
 
         SundayDecorator sundayDecorator = new SundayDecorator();
         SaturdayDecorator saturdayDecorator = new SaturdayDecorator();
+        TodayDecorator todayDecorator = new TodayDecorator(getContext());
+
+        CustomCalendarDecorator decorator = new CustomCalendarDecorator(getContext());
+        materialCalendarView.addDecorator(decorator);
+
 
         materialCalendarView.addDecorator(saturdayDecorator);
         materialCalendarView.addDecorator(sundayDecorator);
+        materialCalendarView.addDecorator(todayDecorator);
 
         return view;
     }
