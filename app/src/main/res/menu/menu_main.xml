@@ -4,7 +4,7 @@
     >
     <item
         android:id="@+id/action_theme"
-        android:icon="@drawable/palette"
+        android:icon="@drawable/palette_24px"
         android:title="theme"
         app:showAsAction="ifRoom" />
 

@@ -10,7 +10,7 @@ import com.jinwan.appproject.helper.ThemeUtils;
 
 public class ThemeChoice extends BaseActivity {
 
-    Button btn_back, btn_theme1, btn_theme2, btn_theme3, btn_theme4;
+    Button btn_theme1, btn_theme2, btn_theme3, btn_theme4;
 
 
     @Override
@@ -18,7 +18,6 @@ public class ThemeChoice extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_choice);
 
-        btn_back = (Button) findViewById(R.id.btn_back);
 
         btn_theme1 = (Button) findViewById(R.id.button1);
 

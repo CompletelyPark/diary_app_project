@@ -1,10 +1,12 @@
-package com.jinwan.appproject.Data;
+package com.jinwan.appproject.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.jinwan.appproject.schedule.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

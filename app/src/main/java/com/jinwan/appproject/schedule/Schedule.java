@@ -1,4 +1,4 @@
-package com.jinwan.appproject.Data;
+package com.jinwan.appproject.schedule;
 
 public class Schedule {
     private String name;

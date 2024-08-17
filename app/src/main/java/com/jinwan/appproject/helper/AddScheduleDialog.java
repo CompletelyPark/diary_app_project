@@ -12,9 +12,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
-import com.jinwan.appproject.Data.Schedule;
+import com.jinwan.appproject.schedule.Schedule;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.recycler.ScheduleAdapter;
+import com.jinwan.appproject.schedule.ScheduleAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

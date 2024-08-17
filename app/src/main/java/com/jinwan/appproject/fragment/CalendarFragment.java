@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.Data.Schedule;
+import com.jinwan.appproject.schedule.Schedule;
 import com.jinwan.appproject.helper.SaturdayDecorator;
 import com.jinwan.appproject.helper.ScheduleDialog;
 import com.jinwan.appproject.helper.SundayDecorator;
-import com.jinwan.appproject.recycler.ScheduleAdapter;
+import com.jinwan.appproject.schedule.ScheduleAdapter;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;

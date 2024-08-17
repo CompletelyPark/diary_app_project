@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.recycler.ScheduleAdapter;
-import com.jinwan.appproject.Data.Schedule;
+import com.jinwan.appproject.schedule.ScheduleAdapter;
+import com.jinwan.appproject.schedule.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

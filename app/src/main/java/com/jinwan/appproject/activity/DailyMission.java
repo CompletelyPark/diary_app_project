@@ -9,7 +9,6 @@ public class DailyMission extends BaseActivity {
 
     private LinearLayout layout_daily_Mission;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

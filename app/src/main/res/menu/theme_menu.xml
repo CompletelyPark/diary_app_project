@@ -4,7 +4,7 @@
     >
     <item
         android:id="@+id/action_back"
-        android:icon="@drawable/arrow_back_ios"
+        android:icon="@drawable/arrow_back_ios_24px"
         android:title="back"
         app:showAsAction="ifRoom"
         />
