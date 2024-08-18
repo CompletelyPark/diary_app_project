@@ -54,7 +54,6 @@ public class Diary extends BaseActivity {
                 SpannableString spannableString = new SpannableString(text);
 //              text font
                 if(item.getItemId()==R.id.text_font){
-                    showDialog();
                     return true;
                 }
 
