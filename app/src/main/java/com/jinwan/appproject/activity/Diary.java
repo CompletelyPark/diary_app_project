@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.dialog.TextFontDialog;
 
 public class Diary extends BaseActivity {
 
@@ -54,6 +55,7 @@ public class Diary extends BaseActivity {
                 SpannableString spannableString = new SpannableString(text);
 //              text font
                 if(item.getItemId()==R.id.text_font){
+                    new TextFontDialog(Diary.this).show();
                     return true;
                 }
 
