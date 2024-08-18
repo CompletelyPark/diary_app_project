@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-//  테마 선택 activity 로 이동하는 method
+//  activity 이동 method
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_theme && istheme) {

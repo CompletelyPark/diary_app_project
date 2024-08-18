@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorPrimaryContainer"
         app:layout_collapseMode="pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="달력"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorPrimary"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="일일"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorPrimary"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="일기"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorPrimary"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
     </LinearLayout>

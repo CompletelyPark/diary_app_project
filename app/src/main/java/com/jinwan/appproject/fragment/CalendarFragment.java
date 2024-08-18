@@ -67,6 +67,7 @@ public class CalendarFragment extends Fragment {
                     istf = true;
                     toggleCalendar.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow_downward_24px));
                 }
+
             }
         });
 

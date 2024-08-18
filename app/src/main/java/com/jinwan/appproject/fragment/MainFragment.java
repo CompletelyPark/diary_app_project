@@ -152,6 +152,7 @@ public class MainFragment extends Fragment {
 
                 // 버튼 텍스트 업데이트
                 btn_text.setText(randomQ);
+
             }
         });
 

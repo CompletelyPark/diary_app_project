@@ -62,6 +62,7 @@ public class AddScheduleDialog {
                     String dateString = sdf.format(new Date((Long) selection)); // Long으로 캐스팅
                     dayfirst.setText(dateString);
                 });
+
             }
         });
 
@@ -75,6 +76,7 @@ public class AddScheduleDialog {
                     String dateString = sdf.format(new Date((Long) selection));
                     daylast.setText(dateString);
                 });
+
             }
         });
 
@@ -96,6 +98,7 @@ public class AddScheduleDialog {
                 });
 
                 timePicker.show(((FragmentActivity) context).getSupportFragmentManager(), "Time_picker");
+
             }
         });
 
@@ -117,6 +120,7 @@ public class AddScheduleDialog {
                 });
 
                 timePicker.show(((FragmentActivity) context).getSupportFragmentManager(), "Time_picker");
+
             }
         });
 

@@ -32,6 +32,7 @@ public class ButtonSetupHelper {
             @Override
             public void onClick(View view) {
                 fragmentLoader.loadFragment(new DiaryFragment());
+
             }
         });
     }

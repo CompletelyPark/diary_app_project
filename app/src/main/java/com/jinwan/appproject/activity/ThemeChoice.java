@@ -28,6 +28,7 @@ public class ThemeChoice extends BaseActivity {
             @Override
             public void onClick(View view) {
                 ThemeUtils.setTheme(ThemeChoice.this, R.style.Base_Theme_AppProject);
+
             }
         });
 
@@ -35,18 +36,21 @@ public class ThemeChoice extends BaseActivity {
             @Override
             public void onClick(View view) {
                 ThemeUtils.setTheme(ThemeChoice.this, R.style.Theme2FFC2E);
+
             }
         });
         btn_theme3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ThemeUtils.setTheme(ThemeChoice.this, R.style.ThemeB59DF7);
+
             }
         });
         btn_theme4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ThemeUtils.setTheme(ThemeChoice.this, R.style.ThemeFFDE3F);
+
             }
         });
     }

@@ -45,6 +45,7 @@ public class ScheduleDialog {
             @Override
             public void onClick(View view) {
                 new AddScheduleDialog(context, scheduleList, scheduleAdapter, selectedDate).show();
+
             }
         });
 
@@ -54,6 +55,7 @@ public class ScheduleDialog {
             @Override
             public void onClick(View view) {
                 new AddCelebrityDialog(context).show();
+
             }
         });
 
