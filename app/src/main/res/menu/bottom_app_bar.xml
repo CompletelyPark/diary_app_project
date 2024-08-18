@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/text_font"
+        android:icon="@drawable/title_48px"
+        android:title="font set"
+        android:contentDescription="text font set"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/text_font"
+        android:icon="@drawable/text_increase_48px"
+        android:title="font size set"
+        android:contentDescription="text size set"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/text_bold"
+        android:icon="@drawable/format_bold_24px"
+        android:title="text_bold"
+        android:contentDescription="text set bold"
+        app:showAsAction="always"
+       />
+
+    <item
+        android:id="@+id/text_italic"
+        android:icon="@drawable/format_italic_48px"
+        android:title="text_italic"
+        android:contentDescription="text set italic"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/text_underline"
+        android:icon="@drawable/text_format_48px"
+        android:title="text_underline"
+        android:contentDescription="text set underline"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/text_align"
+        android:icon="@drawable/format_align_left_48px"
+        android:title="text_align"
+        android:contentDescription="text align set"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/btn_check"
+        android:icon="@drawable/check_48px"
+        android:title="check"
+        android:contentDescription="allright check"
+        app:showAsAction="always"
+        />
+
+</menu>

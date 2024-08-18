@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity {
     private boolean ishome = true;
     private boolean istheme = true;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +34,7 @@ public class MainActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
         int colorOnPrimary = getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary);
         toolbar.setTitleTextColor(colorOnPrimary);
-//        Log.d("jtag",colorOnPrimary+"");
         toolbar.setTitle(DateUtils.getCurrentDateFormattedMonthDay());
-
         setSupportActionBar(toolbar);
 
         fragmentManager = getSupportFragmentManager();
@@ -46,45 +43,23 @@ public class MainActivity extends BaseActivity {
         loadFragment(new MainFragment());
 
         btn_month = findViewById(R.id.btn_month);
-        btn_month.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ishome = true;
-                istheme = true;
-                loadFragment(new CalendarFragment());
-            }
-        });
+        btn_month.setOnClickListener(v -> loadFragmentWithHomeCheck(new CalendarFragment()));
 
         btn_daily = findViewById(R.id.btn_daily);
-        btn_daily.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ishome = true;
-                istheme = true;
-                loadFragment(new DailyFragment());
-            }
-        });
+        btn_daily.setOnClickListener(v -> loadFragmentWithHomeCheck(new DailyFragment()));
 
         btn_diary = findViewById(R.id.btn_diary);
-        btn_diary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ishome = true;
-                istheme = true;
-                loadFragment(new DiaryFragment());
-            }
-        });
-
+        btn_diary.setOnClickListener(v -> loadFragmentWithHomeCheck(new DiaryFragment()));
     }
 
-//  툴바 메뉴 활성화 method
+    // 툴바 메뉴 활성화 method
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-//  activity 이동 method
+    // activity 이동 method
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_theme && istheme) {
@@ -104,19 +79,27 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//  fragment load method
+    // Fragment 로드 시 홈 체크를 위한 메서드
+    private void loadFragmentWithHomeCheck(Fragment fragment) {
+        ishome = true;
+        istheme = true;
+        loadFragment(fragment);
+    }
+
+    // Fragment load method
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN); // 애니메이션 추가
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-//  색상 가져오는 method
+
+    // 색상 가져오는 method
     private int getColorFromAttr(int attr) {
         TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(attr, typedValue, true);
         return typedValue.data;
     }
-
 }

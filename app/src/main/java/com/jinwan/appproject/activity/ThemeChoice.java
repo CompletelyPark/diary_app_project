@@ -17,9 +17,7 @@ public class ThemeChoice extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_choice);
 
-
         btn_theme1 = (Button) findViewById(R.id.button1);
-
         btn_theme2 = (Button) findViewById(R.id.button2);
         btn_theme3 = (Button) findViewById(R.id.button3);
         btn_theme4 = (Button) findViewById(R.id.button4);
