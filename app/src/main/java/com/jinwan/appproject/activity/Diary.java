@@ -126,7 +126,7 @@ public class Diary extends BaseActivity {
         editor.putString("content_" + currentTime, content);
         editor.putInt("textSize_" + currentTime, textSize);
         editor.putInt("alignment_" + currentTime, align);
-        editor.putString("weatherIcon_" + currentTime, weatherIconManager.getCurrentWeatherIcon());
+//        editor.putString("weatherIcon_" + currentTime, weatherIconManager.getCurrentWeatherIcon());
 
         editor.apply(); // 비동기적으로 저장
     }
