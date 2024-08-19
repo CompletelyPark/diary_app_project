@@ -1,6 +1,7 @@
 package com.jinwan.appproject.activity;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -107,4 +108,27 @@ public class Diary extends BaseActivity {
         }
         item.setIcon(drawable);
     }
+
+    private void saveDiaryEntry() {
+        String title = title_text.getText().toString();
+        String text = daily_diary_text.getText().toString();
+        String content = daily_diary_text.getText().toString();
+
+        // SharedPreferences에 데이터 저장
+        SharedPreferences sharedPreferences = getSharedPreferences("diary_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Key를 고유하게 설정 (예: 시간 기반)
+        long currentTime = System.currentTimeMillis();
+        editor.putString("title_" + currentTime, title);
+        editor.putString("edit_text_" + currentTime, text);
+
+        editor.putString("content_" + currentTime, content);
+        editor.putInt("textSize_" + currentTime, textSize);
+        editor.putInt("alignment_" + currentTime, align);
+        editor.putString("weatherIcon_" + currentTime, weatherIconManager.getCurrentWeatherIcon());
+
+        editor.apply(); // 비동기적으로 저장
+    }
+
 }
