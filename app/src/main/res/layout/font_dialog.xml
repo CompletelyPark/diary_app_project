@@ -11,40 +11,50 @@
         android:id="@+id/font1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingStart="10dp"
-        android:text="기본 서체"/>
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:padding= "10dp"
+
+        android:text="서체1"/>
 
     <TextView
         android:id="@+id/font2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingStart="10dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:padding= "10dp"
+        android:fontFamily="@font/yeonsung"
         android:text="서체 2"/>
 
     <TextView
         android:id="@+id/font3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingStart="10dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:padding="10dp"
+        android:fontFamily="@font/jua"
         android:text="서체 3"/>
 
     <TextView
         android:id="@+id/font4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingStart="10dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/nanummyeongjo"
+        android:padding= "10dp"
         android:text="서체 4"/>
 
     <TextView
         android:id="@+id/font5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingStart="10dp"
+        android:layout_margin="10dp"
+        android:textSize="24sp"
+        android:padding= "10dp"
+        android:fontFamily="@font/hamlet"
         android:text="서체 5"/>
 
 </LinearLayout>
