@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.adapter.CelebrityAdapter;
 import com.jinwan.appproject.adapter.ScheduleAdapter;
@@ -68,9 +67,6 @@ public class CalendarFragment extends Fragment {
         recyclerView_celebrity.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-
-
-
         MaterialButton btn_open_close = (MaterialButton) view.findViewById(R.id.btn_open_close);
         MaterialButton btn_schedule = (MaterialButton) view.findViewById(R.id.btn_schedule);
         MaterialButton btn_celebrity = (MaterialButton) view.findViewById(R.id.btn_celebrity);
@@ -91,7 +87,6 @@ public class CalendarFragment extends Fragment {
             }
         });
 
-//        MaterialButtonToggleGroup materialButtonToggleGroup = (MaterialButtonToggleGroup) view.findViewById(R.id.toggleButton);
         btn_open_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,22 +115,6 @@ public class CalendarFragment extends Fragment {
                 isopen = !isopen;
             }
         });
-
-//        materialButtonToggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-//            @Override
-//            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-//
-//                if(checkedId == R.id.btn_schedule){
-//                     recyclerView_schedule.setVisibility(View.VISIBLE);
-//                     recyclerView_celebrity.setVisibility(View.GONE);
-//                }
-//                else if(checkedId == R.id.btn_celebrity){
-//                    recyclerView_schedule.setVisibility(View.GONE);
-//                    recyclerView_celebrity.setVisibility(View.VISIBLE);
-//
-//                }
-//            }
-//        });
 
         // Calendar date selection listener
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
