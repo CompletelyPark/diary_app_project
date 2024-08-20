@@ -1,4 +1,4 @@
-package com.jinwan.appproject.diary;
+package com.jinwan.appproject.dialog;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,7 +16,7 @@ public class FontSelectorDialog {
 
     public static void show(Context context, EditText editText) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
-        View dialogView = LayoutInflater.from(context).inflate(R.layout.font_dialog, null);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_font, null);
 
         TextView[] fontViews = {
                 dialogView.findViewById(R.id.font1),

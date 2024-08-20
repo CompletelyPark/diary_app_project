@@ -1,4 +1,4 @@
-package com.jinwan.appproject.diary;
+package com.jinwan.appproject.helper;
 
 import android.text.Spannable;
 import android.widget.EditText;

@@ -12,9 +12,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
-import com.jinwan.appproject.schedule.Schedule;
+import com.jinwan.appproject.adapter.ScheduleAdapter;
+import com.jinwan.appproject.list.Schedule;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.schedule.ScheduleAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,20 +25,21 @@ import java.util.Locale;
 public class AddScheduleDialog {
 
     private final Context context;
-    private final List<Schedule> scheduleList;
     private final ScheduleAdapter scheduleAdapter;
+    private final List<Schedule> scheduleList;
+
     private final long selectedDate;
 
-    public AddScheduleDialog(Context context, List<Schedule> scheduleList, ScheduleAdapter scheduleAdapter, long selectedDate) {
+    public AddScheduleDialog(Context context, ScheduleAdapter scheduleAdapter, List<Schedule> scheduleList, long selectedDate) {
         this.context = context;
-        this.scheduleList = scheduleList;
         this.scheduleAdapter = scheduleAdapter;
+        this.scheduleList = scheduleList;
         this.selectedDate = selectedDate;
     }
 
     public void show() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
-        View dialogView = LayoutInflater.from(context).inflate(R.layout.add_schedule, null);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_schedule, null);
 
         EditText schedule_name = dialogView.findViewById(R.id.schedule_name);
         EditText schedule_memo = dialogView.findViewById(R.id.schedule_memo);

@@ -1,4 +1,4 @@
-package com.jinwan.appproject.schedule;
+package com.jinwan.appproject.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.list.Schedule;
 
 import java.util.List;
 

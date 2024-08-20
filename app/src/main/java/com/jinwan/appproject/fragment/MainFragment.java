@@ -155,7 +155,6 @@ public class MainFragment extends Fragment {
 
             }
         });
-
         // 주기적으로 텍스트 변경
         startAutoChangeText();
 
@@ -172,8 +171,7 @@ public class MainFragment extends Fragment {
 
                 // 버튼 텍스트 업데이트
                 btn_text.setText(randomQ);
-
-                // 다음 실행 예약 5초
+                // 다음 실행 예약 10초
                 handler.postDelayed(this, 10000);
             }
         };

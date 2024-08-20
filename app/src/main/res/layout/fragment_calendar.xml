@@ -16,13 +16,6 @@
         app:mcv_dateTextAppearance="?attr/colorOnTertiaryContainer"
         />
 
-    <Button
-        android:id="@+id/toggleCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/arrow_upward_24px"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:padding="16dp"

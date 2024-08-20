@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.schedule.ScheduleAdapter;
-import com.jinwan.appproject.schedule.Schedule;
+import com.jinwan.appproject.adapter.CelebrityAdapter;
+import com.jinwan.appproject.adapter.ScheduleAdapter;
+import com.jinwan.appproject.list.Celebrity;
+import com.jinwan.appproject.list.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,15 +19,19 @@ import java.util.Locale;
 public class ScheduleDialog {
 
     private final Context context;
-    private final List<Schedule> scheduleList;
     private final ScheduleAdapter scheduleAdapter;
+    private final List<Schedule> scheduleList;
+    private final CelebrityAdapter celebrityAdapter;
+    private final List<Celebrity> celebrityList;
     private final long selectedDate;
     String dateString;
 
-    public ScheduleDialog(Context context, List<Schedule> scheduleList, ScheduleAdapter scheduleAdapter, long selectedDate) {
+    public ScheduleDialog(Context context, ScheduleAdapter scheduleAdapter, List<Schedule> scheduleList, CelebrityAdapter celebrityAdapter, List<Celebrity> celebrityList, long selectedDate) {
         this.context = context;
-        this.scheduleList = scheduleList;
         this.scheduleAdapter = scheduleAdapter;
+        this.scheduleList = scheduleList;
+        this.celebrityAdapter = celebrityAdapter;
+        this.celebrityList = celebrityList;
         this.selectedDate = selectedDate;
     }
 
@@ -36,7 +42,7 @@ public class ScheduleDialog {
         dateString = sdf.format(selectedDate);
         builder.setTitle(dateString);
 
-        View dialogView = LayoutInflater.from(context).inflate(R.layout.schedule_add_dialog, null);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_add, null);
         builder.setView(dialogView);
 
         // Schedule layout
@@ -44,7 +50,7 @@ public class ScheduleDialog {
         layout_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddScheduleDialog(context, scheduleList, scheduleAdapter, selectedDate).show();
+                new AddScheduleDialog(context,scheduleAdapter,scheduleList,selectedDate).show();
 
             }
         });
@@ -54,8 +60,7 @@ public class ScheduleDialog {
         layout_celebrity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddCelebrityDialog(context).show();
-
+                new AddCelebrityDialog(context,celebrityAdapter,celebrityList).show();
             }
         });
 

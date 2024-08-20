@@ -1,7 +1,5 @@
 package com.jinwan.appproject.activity;
 
-
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,18 +7,20 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.diary.FontSelectorDialog;
-import com.jinwan.appproject.diary.TextFormattingHelper;
-import com.jinwan.appproject.diary.WeatherIconManager;
+import com.jinwan.appproject.dialog.FontSelectorDialog;
+import com.jinwan.appproject.helper.TextFormattingHelper;
+import com.jinwan.appproject.helper.WeatherIconHelper;
 
-public class Diary extends BaseActivity {
+public class DiaryActivity extends BaseActivity {
 
     private Button button;
+    private Button btn_save;
     private BottomAppBar bottomAppBar;
 
     private EditText title_text;
@@ -28,28 +28,36 @@ public class Diary extends BaseActivity {
 
     private int align = 0;
     private int textSize = 0;
-    private WeatherIconManager weatherIconManager;
+    private WeatherIconHelper weatherIconHelper;
     private TextFormattingHelper textFormattingHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.daily_diary);
+        setContentView(R.layout.activity_daily_diary);
 
         button = findViewById(R.id.btn_back);
         button.setOnClickListener(view -> finish());
 
+        btn_save = findViewById(R.id.btn_save);
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         title_text = findViewById(R.id.title_text);
         daily_diary_text = findViewById(R.id.daily_diary_text);
 
-        weatherIconManager = new WeatherIconManager(this);
+        weatherIconHelper = new WeatherIconHelper(this);
         textFormattingHelper = new TextFormattingHelper(daily_diary_text);
 
         bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setOnMenuItemClickListener(item -> {
 
             if (item.getItemId()==R.id.text_font) {
-                FontSelectorDialog.show(Diary.this, daily_diary_text);
+                FontSelectorDialog.show(DiaryActivity.this, daily_diary_text);
                 return true;
             }
             else if (item.getItemId()== R.id.font_size) {
@@ -74,11 +82,12 @@ public class Diary extends BaseActivity {
                 return true;
             }
              else if (item.getItemId()== R.id.weather){
-                    weatherIconManager.updateWeatherIcon(item);
+                    weatherIconHelper.updateWeatherIcon(item);
                     return true;
             }
             return false;
         });
+
     }
 
     private void adjustFontSize() {
@@ -109,26 +118,5 @@ public class Diary extends BaseActivity {
         item.setIcon(drawable);
     }
 
-    private void saveDiaryEntry() {
-        String title = title_text.getText().toString();
-        String text = daily_diary_text.getText().toString();
-        String content = daily_diary_text.getText().toString();
-
-        // SharedPreferences에 데이터 저장
-        SharedPreferences sharedPreferences = getSharedPreferences("diary_prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // Key를 고유하게 설정 (예: 시간 기반)
-        long currentTime = System.currentTimeMillis();
-        editor.putString("title_" + currentTime, title);
-        editor.putString("edit_text_" + currentTime, text);
-
-        editor.putString("content_" + currentTime, content);
-        editor.putInt("textSize_" + currentTime, textSize);
-        editor.putInt("alignment_" + currentTime, align);
-//        editor.putString("weatherIcon_" + currentTime, weatherIconManager.getCurrentWeatherIcon());
-
-        editor.apply(); // 비동기적으로 저장
-    }
 
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import com.jinwan.appproject.R;
 
-public class ThemeUtils {
+public class ThemeHelper {
     private static final String PREFS_NAME = "theme_prefs";
     private static final String KEY_THEME = "current_theme";
 

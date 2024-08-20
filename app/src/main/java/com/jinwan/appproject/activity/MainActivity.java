@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -16,7 +15,7 @@ import com.jinwan.appproject.fragment.CalendarFragment;
 import com.jinwan.appproject.fragment.MainFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
-import com.jinwan.appproject.helper.DateUtils;
+import com.jinwan.appproject.helper.DateHelper;
 
 public class MainActivity extends BaseActivity {
     private Toolbar toolbar;
@@ -34,7 +33,7 @@ public class MainActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
         int colorOnPrimary = getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary);
         toolbar.setTitleTextColor(colorOnPrimary);
-        toolbar.setTitle(DateUtils.getCurrentDateFormattedMonthDay());
+        toolbar.setTitle(DateHelper.getCurrentDateFormattedMonthDay());
         setSupportActionBar(toolbar);
 
         fragmentManager = getSupportFragmentManager();
@@ -65,7 +64,7 @@ public class MainActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_theme && istheme) {
             ishome = true;
             istheme = false;
-            Intent intent = new Intent(this, ThemeChoice.class);
+            Intent intent = new Intent(this, ThemeChoiceActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
@@ -94,7 +93,6 @@ public class MainActivity extends BaseActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
     // 색상 가져오는 method
     private int getColorFromAttr(int attr) {
