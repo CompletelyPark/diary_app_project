@@ -64,7 +64,6 @@ public class DiaryActivity extends BaseActivity {
                 adjustFontSize();
                 return true;
             }
-
             else if (item.getItemId()==R.id.text_bold) {
                 textFormattingHelper.applyStyle(new StyleSpan(Typeface.BOLD));
                 return true;
