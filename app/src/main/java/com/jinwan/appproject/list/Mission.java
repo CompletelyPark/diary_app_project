@@ -1,7 +1,7 @@
 package com.jinwan.appproject.list;
 
 public class Mission {
-
+    private int id; // 고유 ID
     private String memo;
     private String timeFirst;
     private String timeLast;
@@ -11,6 +11,15 @@ public class Mission {
         this.timeFirst = timeFirst;
         this.timeLast = timeLast;
     }
+
+    public Mission(int id, String memo, String timeFirst, String timeLast) {
+        this.id = id;
+        this.memo = memo;
+        this.timeFirst = timeFirst;
+        this.timeLast = timeLast;
+    }
+
+    public int getId() { return id; }
 
     public String getMemo2() {
         return memo;
