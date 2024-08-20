@@ -12,7 +12,7 @@ import com.jinwan.appproject.list.Mission;
 
 import java.util.List;
 
-public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.ScheduleViewHolder> {
+public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionViewHolder> {
     private List<Mission> mission;
 
     public MissionAdapter(List<Mission> mission) {
@@ -20,13 +20,13 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.Schedule
     }
 
     @NonNull @Override
-    public ScheduleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MissionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_mission, parent, false);
-        return new ScheduleViewHolder(view);
+        return new MissionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MissionViewHolder holder, int position) {
         Mission schedule = mission.get(position);
         holder.memo2.setText(schedule.getMemo2());
         holder.timeFirst2.setText(schedule.getTimeFirst2());
@@ -38,10 +38,10 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.Schedule
         return mission.size();
     }
 
-    public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
+    public static class MissionViewHolder extends RecyclerView.ViewHolder {
         TextView memo2, timeFirst2, timeLast2;
 
-        public ScheduleViewHolder(@NonNull View itemView) {
+        public MissionViewHolder(@NonNull View itemView) {
             super(itemView);
             memo2 = itemView.findViewById(R.id.schedule_memo2);
             timeFirst2 = itemView.findViewById(R.id.timefirst2);
