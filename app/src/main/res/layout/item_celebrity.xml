@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/celebration_48px"
+            android:layout_marginEnd="10dp" />
+
+        <TextView
+            android:id="@+id/celebrity_day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Celebrity Day"
+            android:gravity="center"
+            android:layout_marginEnd="20dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/celebrity_memo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Celebrity Memo"
+        android:textSize="20sp" />
+
+
+</LinearLayout>
