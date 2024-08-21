@@ -33,7 +33,7 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
     public void onBindViewHolder(@NonNull CelebrityViewHolder holder, int position) {
         Celebrity celebrity = celebrities.get(position);
         holder.celebrityMemo.setText(celebrity.getMemo());
-        holder.celebrityDay.setText(DateHelper.getCurrentDateFormattedMonthDayYear());
+        holder.celebrityDay.setText(celebrity.getDate());
     }
 
     @Override

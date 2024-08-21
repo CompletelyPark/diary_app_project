@@ -28,6 +28,8 @@ public class Schedule {
         this.timeLast = timeLast;
     }
 
+    public int getId() {return id;}
+
     public String getName() {
         return name;
     }

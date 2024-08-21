@@ -83,19 +83,19 @@ public class DailyFragment extends Fragment {
         builder.setTitle("일정 추가");
         builder.setView(dialogView);
 
-        TextView schedule_memo2 = dialogView.findViewById(R.id.schedule_memo2);
-        TextView timefirst2 = dialogView.findViewById(R.id.timefirst2);
-        TextView timelast2 = dialogView.findViewById(R.id.timelast2);
+        TextView schedule_memo_daily_mission = dialogView.findViewById(R.id.schedule_memo_daily_mission);
+        TextView timefirst_daily_mission = dialogView.findViewById(R.id.timefirst_daily_mission);
+        TextView timelast_daily_mission = dialogView.findViewById(R.id.timelast_daily_mission);
 
-        timefirst2.setOnClickListener(v -> showTimePicker(timefirst2));
-        timelast2.setOnClickListener(v -> showTimePicker(timelast2));
+        timefirst_daily_mission.setOnClickListener(v -> showTimePicker(timefirst_daily_mission));
+        timelast_daily_mission.setOnClickListener(v -> showTimePicker(timelast_daily_mission));
 
         builder.setPositiveButton("확인", (dialogInterface, i) -> {
-            String str_schedule_memo2 = schedule_memo2.getText().toString();
-            String str_timefirst2 = timefirst2.getText().toString();
-            String str_timelast2 = timelast2.getText().toString();
+            String str_schedule_memo_daily_mission = schedule_memo_daily_mission.getText().toString();
+            String str_timefirst_daily_mission = timefirst_daily_mission.getText().toString();
+            String str_timelast_daily_mission = timelast_daily_mission.getText().toString();
 
-            Mission mission = new Mission( str_schedule_memo2, str_timefirst2, str_timelast2);
+            Mission mission = new Mission( str_schedule_memo_daily_mission, str_timefirst_daily_mission, str_timelast_daily_mission);
             missionlist.add(mission);
             missionAdapter.notifyDataSetChanged(); // RecyclerView 업데이트
 
@@ -107,28 +107,29 @@ public class DailyFragment extends Fragment {
         builder.show(); // Dialog 표시
     }
 
+//      수정 dialog
         private void showEditDialog(Mission mission) {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
             View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_daily_mission, null);
             builder.setTitle("일정 수정");
             builder.setView(dialogView);
 
-            TextView schedule_memo2 = dialogView.findViewById(R.id.schedule_memo2);
-            TextView timefirst2 = dialogView.findViewById(R.id.timefirst2);
-            TextView timelast2 = dialogView.findViewById(R.id.timelast2);
+            TextView schedule_memo_daily_mission = dialogView.findViewById(R.id.schedule_memo_daily_mission);
+            TextView timefirst_daily_mission = dialogView.findViewById(R.id.timefirst_daily_mission);
+            TextView timelast_daily_mission = dialogView.findViewById(R.id.timelast_daily_mission);
 
             // 기존 데이터로 다이얼로그 초기화
-            schedule_memo2.setText(mission.getMemo2());
-            timefirst2.setText(mission.getTimeFirst2());
-            timelast2.setText(mission.getTimeLast2());
+            schedule_memo_daily_mission.setText(mission.getMemo2());
+            timefirst_daily_mission.setText(mission.getTimeFirst2());
+            timelast_daily_mission.setText(mission.getTimeLast2());
 
-            timefirst2.setOnClickListener(v -> showTimePicker(timefirst2));
-            timelast2.setOnClickListener(v -> showTimePicker(timelast2));
+            timefirst_daily_mission.setOnClickListener(v -> showTimePicker(timefirst_daily_mission));
+            timelast_daily_mission.setOnClickListener(v -> showTimePicker(timelast_daily_mission));
 
             builder.setPositiveButton("수정", (dialogInterface, i) -> {
-                String updatedMemo = schedule_memo2.getText().toString();
-                String updatedTimeFirst = timefirst2.getText().toString();
-                String updatedTimeLast = timelast2.getText().toString();
+                String updatedMemo = schedule_memo_daily_mission.getText().toString();
+                String updatedTimeFirst = timefirst_daily_mission.getText().toString();
+                String updatedTimeLast = timelast_daily_mission.getText().toString();
 
                 Mission updatedMission = new Mission(mission.getId(), updatedMemo, updatedTimeFirst, updatedTimeLast);
 
@@ -144,6 +145,7 @@ public class DailyFragment extends Fragment {
             builder.show();
         }
 
+//      삭제 dialog
         private void showDeleteDialog(Mission mission) {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
             builder.setTitle("삭제 확인");
@@ -161,6 +163,7 @@ public class DailyFragment extends Fragment {
             builder.show();
         }
 
+//      버튼으로 날짜 선택시 해당 날짜에 저장돼 있는 일정 불러오는 메서드
         private void showDatePicker() {
             int year = selectedDate.get(Calendar.YEAR);
             int month = selectedDate.get(Calendar.MONTH);

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
 
 public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
 
@@ -22,6 +23,8 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "celebrities";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_MEMO = "memo";
+    private static final String COLUMN_SELECTED_DATE = "selected_date";
+
     private static final String COLUMN_DATE = "date";
 
     public CelebrityDatabaseHelper(Context context) {
@@ -33,6 +36,7 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_MEMO + " TEXT,"
+                + COLUMN_SELECTED_DATE + " TEXT,"
                 + COLUMN_DATE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -43,11 +47,13 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+//  기념일 추가 메서드
     public void addCelebrity(Celebrity celebrity, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_MEMO, celebrity.getMemo());
+        values.put(COLUMN_SELECTED_DATE, celebrity.getDate());
         values.put(COLUMN_DATE, date);
 
         db.insert(TABLE_NAME, null, values);
@@ -60,6 +66,7 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_MEMO, updatedCelebrity.getMemo());
+        values.put(COLUMN_SELECTED_DATE, updatedCelebrity.getDate());
 
         // 해당 ID의 기념일 업데이트
         return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
@@ -80,6 +87,7 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, new String[]{
                 COLUMN_ID,
                 COLUMN_MEMO,
+                COLUMN_SELECTED_DATE,
                 },
                 COLUMN_DATE + "=?", new String[]{date}, null, null, null);
 
@@ -87,8 +95,8 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
             do {
                 Celebrity celebrity = new Celebrity(
                         cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO))
-
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SELECTED_DATE))
                 );
                 celebrities.add(celebrity);
             } while (cursor.moveToNext());
