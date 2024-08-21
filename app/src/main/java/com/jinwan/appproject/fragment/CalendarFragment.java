@@ -264,7 +264,7 @@ public class CalendarFragment extends Fragment {
                             celebrityList.add(newCelebrity);
                             celebrityAdapter.notifyDataSetChanged();
 
-                            celebrityDatabaseHelper.addCelebrity(newCelebrity,);
+                            celebrityDatabaseHelper.addCelebrity(newCelebrity,getFormattedDate(calendar_selectedDate));
                         });
                         builder.setNegativeButton("취소", null);
                         builder.show();
@@ -379,7 +379,11 @@ public class CalendarFragment extends Fragment {
 
         builder.setPositiveButton("확인",((dialogInterface, i) -> {
             String updated_str_celebrity_memo = celebrity_memo.getText().toString();
-            Celebrity updatedCelebrity = new Celebrity(celebrity.getId(),updated_str_celebrity_memo,);
+            Celebrity updatedCelebrity = new Celebrity(
+                    celebrity.getId(),
+                    updated_str_celebrity_memo,
+                    getFormattedDate(calendar_selectedDate)
+                    );
             celebrityDatabaseHelper.updateCelebrity(celebrity.getId(),updatedCelebrity);
             celebrityList.set(celebrityList.indexOf(celebrity),updatedCelebrity);
             celebrityAdapter.notifyDataSetChanged();
