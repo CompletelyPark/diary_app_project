@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.list.Celebrity;
 import com.jinwan.appproject.list.Schedule;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public int getItemCount() {
         return scheduleList.size();
     }
+
 
     public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
         TextView name, memo, dayFirst, dayLast, timeFirst, timeLast;

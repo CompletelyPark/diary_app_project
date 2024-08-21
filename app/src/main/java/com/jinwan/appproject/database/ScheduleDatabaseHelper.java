@@ -127,7 +127,7 @@ public class ScheduleDatabaseHelper extends SQLiteOpenHelper {
         return schedules;
     }
 
-    public List<Schedule> getCelebritiesForToday() {
+    public List<Schedule> getSchedulesForToday() {
         // 현재 날짜 가져오기
         String todayDate = getTodayDate();
 

@@ -81,13 +81,14 @@ public class DiaryActivity extends BaseActivity {
                 return true;
             }
              else if (item.getItemId()== R.id.weather){
-                    weatherIconHelper.updateWeatherIcon(item);
-                    return true;
+                weatherIconHelper.updateWeatherIcon(item);
+                return true;
             }
             return false;
         });
 
     }
+
 
     private void adjustFontSize() {
         float[] textSizes = {22, 24, 26, 28, 30, 10, 12, 14, 16, 18, 20};

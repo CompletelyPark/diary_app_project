@@ -27,10 +27,10 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionV
 
     @Override
     public void onBindViewHolder(@NonNull MissionViewHolder holder, int position) {
-        Mission schedule = mission.get(position);
-        holder.memo2.setText(schedule.getMemo2());
-        holder.timeFirst2.setText(schedule.getTimeFirst2());
-        holder.timeLast2.setText(schedule.getTimeLast2());
+        Mission mission1 = mission.get(position);
+        holder.memo2.setText(mission1.getMemo2());
+        holder.timeFirst2.setText(mission1.getTimeFirst2());
+        holder.timeLast2.setText(mission1.getTimeLast2());
     }
 
     @Override

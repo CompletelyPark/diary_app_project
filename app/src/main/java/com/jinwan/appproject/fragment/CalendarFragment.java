@@ -83,9 +83,9 @@ public class CalendarFragment extends Fragment {
         scheduleDatabaseHelper = new ScheduleDatabaseHelper(getContext());
         scheduleList = scheduleDatabaseHelper.getSchedulesByDate(getFormattedDate(calendar_selectedDate));
         scheduleAdapter = new ScheduleAdapter(scheduleList);
+
         RecyclerView recyclerView_schedule = view.findViewById(R.id.recyclerView_schedule);
         recyclerView_schedule.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView_schedule.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView_schedule, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -102,9 +102,9 @@ public class CalendarFragment extends Fragment {
         celebrityDatabaseHelper = new CelebrityDatabaseHelper(getContext());
         celebrityList = celebrityDatabaseHelper.getCelebritiesByDate(getFormattedDate(calendar_selectedDate));
         celebrityAdapter = new CelebrityAdapter(celebrityList);
+
         RecyclerView recyclerView_celebrity = view.findViewById(R.id.recyclerView_celebrity);
         recyclerView_celebrity.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView_celebrity.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView_celebrity, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -177,11 +177,6 @@ public class CalendarFragment extends Fragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, dayOfMonth);
                 selectedDate = calendar.getTimeInMillis();
-
-
-                // 날짜를 String 형식으로 변환합니다.
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                dateString1 = sdf.format(selectedDate);
 
                 // 스케줄 다이얼로그 생성
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
@@ -258,9 +253,8 @@ public class CalendarFragment extends Fragment {
 
                         builder.setPositiveButton("확인", (dialogInterface, i) -> {
                             String str_celebrity_memo = celebrity_memo.getText().toString();
-                            String datestring2 = dateString1;
 
-                            Celebrity newCelebrity = new Celebrity(str_celebrity_memo, datestring2);
+                            Celebrity newCelebrity = new Celebrity(str_celebrity_memo, dateString);
                             celebrityList.add(newCelebrity);
                             celebrityAdapter.notifyDataSetChanged();
 
@@ -289,6 +283,8 @@ public class CalendarFragment extends Fragment {
 
         recyclerView_schedule.setAdapter(scheduleAdapter);
         recyclerView_celebrity.setAdapter(celebrityAdapter);
+
+
 
         return view;
     }
@@ -343,6 +339,8 @@ public class CalendarFragment extends Fragment {
             scheduleList.set(scheduleList.indexOf(schedule),updatedSchedule);
             scheduleAdapter.notifyDataSetChanged();
         });
+        builder.setNegativeButton("취소", null);
+        builder.show();
     }
 
     private void showDeleteDialogSchedule(Schedule schedule){
@@ -369,8 +367,7 @@ public class CalendarFragment extends Fragment {
         TextView today_time = dialogView.findViewById(R.id.today_time);
         EditText celebrity_memo = dialogView.findViewById(R.id.celebrity_memo);
 
-        today_time.setText(DateHelper.getCurrentDateFormattedMonthDayYear());
-        String datestring = sdf.format(selectedDate);
+        today_time.setText(celebrity.getDate());
 
         builder.setTitle("기념일 수정");
         builder.setView(dialogView);
@@ -384,11 +381,14 @@ public class CalendarFragment extends Fragment {
                     updated_str_celebrity_memo,
                     getFormattedDate(calendar_selectedDate)
                     );
+
             celebrityDatabaseHelper.updateCelebrity(celebrity.getId(),updatedCelebrity);
             celebrityList.set(celebrityList.indexOf(celebrity),updatedCelebrity);
             celebrityAdapter.notifyDataSetChanged();
 
         }));
+        builder.setNegativeButton("취소", null);
+        builder.show();
     }
 
     private void showDeleteDialogCelebrity(Celebrity celebrity){
@@ -438,4 +438,5 @@ public class CalendarFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return sdf.format(calendar.getTime());
     }
+
 }
