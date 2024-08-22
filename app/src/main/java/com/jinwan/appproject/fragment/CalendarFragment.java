@@ -64,7 +64,6 @@ public class CalendarFragment extends Fragment {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     String dateString;
-    String dateString1;
     boolean isopen= false;
 
     @Nullable @Override
@@ -81,7 +80,7 @@ public class CalendarFragment extends Fragment {
 //                -  실력 부족으로 일단 이렇게 해서 visibility로 관리한다
 
         scheduleDatabaseHelper = new ScheduleDatabaseHelper(getContext());
-        scheduleList = scheduleDatabaseHelper.getSchedulesByDate(getFormattedDate(calendar_selectedDate));
+        scheduleList = scheduleDatabaseHelper.getSchedulesForToday();
         scheduleAdapter = new ScheduleAdapter(scheduleList);
 
         RecyclerView recyclerView_schedule = view.findViewById(R.id.recyclerView_schedule);
@@ -100,7 +99,7 @@ public class CalendarFragment extends Fragment {
         }));
 
         celebrityDatabaseHelper = new CelebrityDatabaseHelper(getContext());
-        celebrityList = celebrityDatabaseHelper.getCelebritiesByDate(getFormattedDate(calendar_selectedDate));
+        celebrityList = celebrityDatabaseHelper.getCelebritiesForTodayAndTomorrow();
         celebrityAdapter = new CelebrityAdapter(celebrityList);
 
         RecyclerView recyclerView_celebrity = view.findViewById(R.id.recyclerView_celebrity);
@@ -283,8 +282,6 @@ public class CalendarFragment extends Fragment {
 
         recyclerView_schedule.setAdapter(scheduleAdapter);
         recyclerView_celebrity.setAdapter(celebrityAdapter);
-
-
 
         return view;
     }

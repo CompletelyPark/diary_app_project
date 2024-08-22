@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.jinwan.appproject.list.Celebrity;
+import com.jinwan.appproject.list.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,12 +108,29 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         return celebrities;
     }
 
-    public List<Celebrity> getCelebritiesForToday() {
-        // 현재 날짜 가져오기
-        String todayDate = getTodayDate();
+    public List<Celebrity> getCelebritiesForTodayAndTomorrow() {
+        List<Celebrity> celebrities = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        // 오늘 날짜로 기념일 조회
-        return getCelebritiesByDate(todayDate);
+        String todayDate = getTodayDate();
+        String tomorrowDate = getTomorrowDate();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_SELECTED_DATE + " = ? OR " + COLUMN_SELECTED_DATE + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{todayDate, tomorrowDate});
+        if (cursor.moveToFirst()) {
+            do {
+                Celebrity celebrity = new Celebrity(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SELECTED_DATE))
+                );
+                celebrities.add(celebrity);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return celebrities;
     }
 
     // 현재 날짜를 yyyy-MM-dd 형식으로 반환하는 메서드
@@ -121,4 +139,14 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         Calendar calendar = Calendar.getInstance();
         return dateFormat.format(calendar.getTime());
     }
+
+    // 내일 날짜를 yyyy-MM-dd 형식으로 반환하는 메서드
+    private String getTomorrowDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);  // 현재 날짜에 1일 추가하여 내일 날짜를 얻음
+        return dateFormat.format(calendar.getTime());
+    }
+
+
 }

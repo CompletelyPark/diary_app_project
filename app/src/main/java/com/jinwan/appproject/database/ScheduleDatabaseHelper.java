@@ -128,11 +128,32 @@ public class ScheduleDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Schedule> getSchedulesForToday() {
-        // 현재 날짜 가져오기
+        List<Schedule> schedules = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
         String todayDate = getTodayDate();
 
-        // 오늘 날짜로 일정 조회
-        return getSchedulesByDate(todayDate);
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE ? BETWEEN " + COLUMN_DAY_FIRST + " AND " + COLUMN_DAY_LAST;
+        Cursor cursor = db.rawQuery(query, new String[]{todayDate});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Schedule schedule = new Schedule(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_FIRST)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_LAST)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_FIRST)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_LAST))
+                );
+                schedules.add(schedule);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return schedules;
     }
 
     // 현재 날짜를 yyyy-MM-dd 형식으로 반환하는 메서드

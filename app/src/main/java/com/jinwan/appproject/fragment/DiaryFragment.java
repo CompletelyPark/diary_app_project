@@ -16,28 +16,24 @@ import com.jinwan.appproject.activity.DiaryActivity;
 
 public class DiaryFragment extends Fragment {
 
-
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView_diary;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_daily_diary, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView3);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        recyclerView_diary = view.findViewById(R.id.recyclerView_diary);
+        recyclerView_diary.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // FloatingActionButton 클릭 리스너 설정
         FloatingActionButton floatingActionButton2 = view.findViewById(R.id.floating_action_button2);
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getContext(), DiaryActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
             }
         });
 
