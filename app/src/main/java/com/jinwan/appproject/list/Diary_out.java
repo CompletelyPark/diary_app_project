@@ -1,6 +1,8 @@
 package com.jinwan.appproject.list;
 
-public class Diary_out {
+import java.io.Serializable;
+
+public class Diary_out implements Serializable {
     private int id;
     private String title;
     private int imageId; // 이미지 리소스 id
@@ -11,14 +13,12 @@ public class Diary_out {
         this.imageId = imageId;
     }
 
-    public Diary_out(int imageId, String title) {
-        this.imageId = imageId;
+    public Diary_out(String title, int imageId) {
         this.title = title;
+        this.imageId = imageId;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public String getTitle() {
         return title;

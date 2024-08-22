@@ -30,7 +30,6 @@ import java.util.Locale;
 
 public class DailyFragment extends Fragment {
 
-
         private List<Mission> missionlist; // 스케줄 리스트
         private MissionAdapter missionAdapter; // 어댑터
         private MissionDatabaseHelper dbHelper; // 데이터베이스 헬퍼
