@@ -9,14 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.helper.DateHelper;
 import com.jinwan.appproject.list.Celebrity;
 
 import java.util.List;
 
 public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.CelebrityViewHolder> {
 
-    private List<Celebrity> celebrities;
+    private final List<Celebrity> celebrities;
 
     public CelebrityAdapter(List<Celebrity> celebrities) {
         this.celebrities = celebrities;

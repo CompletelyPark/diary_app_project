@@ -93,39 +93,39 @@ public class ScheduleDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // 특정 날짜의 모든 일정을 불러올 때 ID도 포함
-    public List<Schedule> getSchedulesByDate(String date) {
-        List<Schedule> schedules = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_NAME, new String[]{
-                        COLUMN_ID,
-                        COLUMN_NAME,
-                        COLUMN_MEMO,
-                        COLUMN_DAY_FIRST,
-                        COLUMN_DAY_LAST,
-                        COLUMN_TIME_FIRST,
-                        COLUMN_TIME_LAST},
-                COLUMN_DATE + "=?", new String[]{date}, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Schedule schedule = new Schedule(
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_FIRST)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_LAST)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_FIRST)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_LAST))
-                );
-                schedules.add(schedule);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-
-        return schedules;
-    }
+//    public List<Schedule> getSchedulesByDate(String date) {
+//        List<Schedule> schedules = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.query(TABLE_NAME, new String[]{
+//                        COLUMN_ID,
+//                        COLUMN_NAME,
+//                        COLUMN_MEMO,
+//                        COLUMN_DAY_FIRST,
+//                        COLUMN_DAY_LAST,
+//                        COLUMN_TIME_FIRST,
+//                        COLUMN_TIME_LAST},
+//                COLUMN_DATE + "=?", new String[]{date}, null, null, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                Schedule schedule = new Schedule(
+//                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_FIRST)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DAY_LAST)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_FIRST)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME_LAST))
+//                );
+//                schedules.add(schedule);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//
+//        return schedules;
+//    }
 
     public List<Schedule> getSchedulesForToday() {
         List<Schedule> schedules = new ArrayList<>();

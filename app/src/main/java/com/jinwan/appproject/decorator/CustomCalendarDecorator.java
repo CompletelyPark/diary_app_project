@@ -11,16 +11,14 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 
 public class CustomCalendarDecorator implements DayViewDecorator {
-    private final Drawable backgroundDrawable;
-    private final int dayTextColor;
     private final int weekdayTextColor;
 
     public CustomCalendarDecorator(Context context) {
         // 색상 속성 가져오기
         int backgroundColor = getColorFromAttr(context, androidx.appcompat.R.attr.colorPrimary);
-        dayTextColor = getColorFromAttr(context, com.google.android.material.R.attr.colorOnPrimary);
+        int dayTextColor = getColorFromAttr(context, com.google.android.material.R.attr.colorOnPrimary);
         weekdayTextColor = getColorFromAttr(context, com.google.android.material.R.attr.colorOnPrimary);
-        backgroundDrawable = new ColorDrawable(backgroundColor);
+        Drawable backgroundDrawable = new ColorDrawable(backgroundColor);
     }
 
     private int getColorFromAttr(Context context, int attr) {

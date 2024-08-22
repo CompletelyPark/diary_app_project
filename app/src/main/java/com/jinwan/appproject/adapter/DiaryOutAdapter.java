@@ -15,7 +15,7 @@ import com.jinwan.appproject.list.Diary_out;
 import java.util.List;
 
 public class DiaryOutAdapter extends RecyclerView.Adapter<DiaryOutAdapter.DiaryOutViewHolder> {
-    private List<Diary_out> diary_outlist;
+    private final List<Diary_out> diary_outlist;
 
     public DiaryOutAdapter(List<Diary_out> diaryOutlist) {
         diary_outlist = diaryOutlist;

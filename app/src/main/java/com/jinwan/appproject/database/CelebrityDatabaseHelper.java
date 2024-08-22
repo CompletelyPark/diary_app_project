@@ -7,14 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.jinwan.appproject.list.Celebrity;
-import com.jinwan.appproject.list.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
 
 public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
 
@@ -81,32 +79,32 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // 특정 날짜의 모든 기념일을 불러올 때 ID도 포함
-    public List<Celebrity> getCelebritiesByDate(String date) {
-        List<Celebrity> celebrities = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_NAME, new String[]{
-                COLUMN_ID,
-                COLUMN_MEMO,
-                COLUMN_SELECTED_DATE,
-                },
-                COLUMN_DATE + "=?", new String[]{date}, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Celebrity celebrity = new Celebrity(
-                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SELECTED_DATE))
-                );
-                celebrities.add(celebrity);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-
-        return celebrities;
-    }
+//    public List<Celebrity> getCelebritiesByDate(String date) {
+//        List<Celebrity> celebrities = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.query(TABLE_NAME, new String[]{
+//                COLUMN_ID,
+//                COLUMN_MEMO,
+//                COLUMN_SELECTED_DATE,
+//                },
+//                COLUMN_DATE + "=?", new String[]{date}, null, null, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                Celebrity celebrity = new Celebrity(
+//                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
+//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SELECTED_DATE))
+//                );
+//                celebrities.add(celebrity);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//
+//        return celebrities;
+//    }
 
     public List<Celebrity> getCelebritiesForTodayAndTomorrow() {
         List<Celebrity> celebrities = new ArrayList<>();

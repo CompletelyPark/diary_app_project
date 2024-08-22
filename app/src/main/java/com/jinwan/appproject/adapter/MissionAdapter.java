@@ -13,7 +13,7 @@ import com.jinwan.appproject.list.Mission;
 import java.util.List;
 
 public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionViewHolder> {
-    private List<Mission> mission;
+    private final List<Mission> mission;
 
     public MissionAdapter(List<Mission> mission) {
         this.mission = mission;

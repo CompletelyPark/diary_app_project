@@ -9,13 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
-import com.jinwan.appproject.list.Celebrity;
 import com.jinwan.appproject.list.Schedule;
 
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
-    private List<Schedule> scheduleList;
+    private final List<Schedule> scheduleList;
 
     public ScheduleAdapter(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;

@@ -22,9 +22,7 @@ import com.jinwan.appproject.helper.DateHelper;
 import com.jinwan.appproject.list.Diary_out;
 
 public class MainActivity extends BaseActivity {
-    private Toolbar toolbar;
     private FragmentManager fragmentManager;
-    private Button btn_month, btn_daily, btn_diary;
 
     private boolean ishome = true;
     private boolean istheme = true;
@@ -39,7 +37,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         int colorOnPrimary = getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary);
         toolbar.setTitleTextColor(colorOnPrimary);
         toolbar.setTitle(DateHelper.getCurrentDateFormattedMonthDay());
@@ -55,15 +53,15 @@ public class MainActivity extends BaseActivity {
 //      기본 프래그먼트
         loadFragment(mainFragment);
 
-        btn_month = findViewById(R.id.btn_month);
+        Button btn_month = findViewById(R.id.btn_month);
         btn_month.setOnClickListener(v ->{
             loadFragmentWithHomeCheck(calendarFragment);
         });
 
-        btn_daily = findViewById(R.id.btn_daily);
+        Button btn_daily = findViewById(R.id.btn_daily);
         btn_daily.setOnClickListener(v -> loadFragmentWithHomeCheck(dailyFragment));
 
-        btn_diary = findViewById(R.id.btn_diary);
+        Button btn_diary = findViewById(R.id.btn_diary);
         btn_diary.setOnClickListener(v -> {
             loadFragmentWithHomeCheck(diaryFragment);
         });
