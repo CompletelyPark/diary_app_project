@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,25 +18,23 @@ import android.widget.TextView;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.database.DiaryDatabaseHelper;
 import com.jinwan.appproject.database.DiaryOutDatabaseHelper;
-import com.jinwan.appproject.dialog.FontSelectorDialog;
-import com.jinwan.appproject.helper.TextFormattingHelper;
-import com.jinwan.appproject.list.Diary_out;
+import com.jinwan.appproject.list.DiaryEntry;
 
 
 public class DiaryActivity extends BaseActivity {
 
     private EditText title_text;
     private EditText daily_diary_text;
-
     private int align = 0;
     private int textSize = 0;
-    private TextFormattingHelper textFormattingHelper;
-
+    private boolean isBold = false;
+    private boolean isItalic = false;
     private int weatherCnt = 0;
-
     private int imageWeather = R.drawable.sunny_48px;
     DiaryOutDatabaseHelper diaryOutDatabaseHelper;
+    DiaryDatabaseHelper diaryDatabaseHelper;
 
     private static String[] fontList = {"Roboto", "sans-serif", "serif", "monospace", "sans-serif-light"};
 
@@ -49,20 +46,26 @@ public class DiaryActivity extends BaseActivity {
         title_text = findViewById(R.id.title_text);
         daily_diary_text = findViewById(R.id.daily_diary_text);
 
-        textFormattingHelper = new TextFormattingHelper(daily_diary_text);
-        diaryOutDatabaseHelper = new DiaryOutDatabaseHelper(getApplicationContext());
-
+//        diaryOutDatabaseHelper = new DiaryOutDatabaseHelper(getApplicationContext());
+        diaryDatabaseHelper = new DiaryDatabaseHelper(getApplicationContext());
         Button button = findViewById(R.id.btn_back);
         button.setOnClickListener(view -> finish());
 
         Button btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(view -> {
-            String str_title = title_text.getText().toString();
-            int weather_icon = imageWeather;
-            Diary_out new_diary_out = new Diary_out(str_title,weather_icon);
-            diaryOutDatabaseHelper.addDiary_out(new_diary_out);
+            DiaryEntry diaryEntry = new DiaryEntry(
+                    0,
+                    title_text.getText().toString(),
+                    daily_diary_text.getText().toString(),
+                    daily_diary_text.getTypeface().toString(),
+                    (int) daily_diary_text.getTextSize(),
+                    isBold,    // BOLD 여부 확인
+                    isItalic,  // ITALIC 여부 확인
+                    imageWeather
+            );
+            diaryDatabaseHelper.addDiaryEntry(diaryEntry);
             Intent resultIntent = new Intent();
-            resultIntent.putExtra("new_diary_out", new_diary_out);
+            resultIntent.putExtra("new_diaryEntry", diaryEntry);
             setResult(RESULT_OK, resultIntent);
             finish();
         });
@@ -71,7 +74,7 @@ public class DiaryActivity extends BaseActivity {
         bottomAppBar.setOnMenuItemClickListener(item -> {
 
             if (item.getItemId()==R.id.text_font) {
-                show(DiaryActivity.this, daily_diary_text);
+                show_font_dialog(DiaryActivity.this, daily_diary_text);
                 return true;
             }
             else if (item.getItemId()== R.id.font_size) {
@@ -79,15 +82,29 @@ public class DiaryActivity extends BaseActivity {
                 return true;
             }
             else if (item.getItemId()==R.id.text_bold) {
-                applyStyle(daily_diary_text, new StyleSpan(Typeface.BOLD));
+                if (!isBold) {
+                    applyStyleToSelectedText(daily_diary_text, new StyleSpan(Typeface.BOLD));
+                    isBold = true;
+                }
+                else {
+                removeStyleFromSelectedText(daily_diary_text, StyleSpan.class);
+                isBold = false;
+            }
                 return true;
             }
             else if (item.getItemId()== R.id.text_italic) {
-                applyStyle(daily_diary_text, new StyleSpan(Typeface.ITALIC));
+                if(!isItalic) {
+                    applyStyleToSelectedText(daily_diary_text, new StyleSpan(Typeface.ITALIC));
+                    isItalic =true;
+                }
+                else{
+                    removeStyleFromSelectedText(daily_diary_text, StyleSpan.class);
+                    isItalic = false;
+                }
                 return true;
             }
-            else if (item.getItemId()==R.id.text_underline) {
-                applyStyle(daily_diary_text, new UnderlineSpan());
+            else if (item.getItemId()==R.id.text_color) {
+
                 return true;
             }
             else if (item.getItemId()==R.id.text_align) {
@@ -165,19 +182,31 @@ public class DiaryActivity extends BaseActivity {
         }
         item.setIcon(drawable);
     }
-    private void applyStyle(EditText editText, Object span) {
-        int start = editText.getSelectionStart();
-        int end = editText.getSelectionEnd();
 
-        if (start < end) {
+    private void applyStyleToSelectedText(EditText editText, Object span) {
+
             Spannable spannable = editText.getText();
-            spannable.setSpan(span, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(span, 0, editText.getText().toString().length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
             editText.setText(spannable);
-            editText.setSelection(end);
-        }
+            editText.setSelection(editText.getText().toString().length()); // 커서를 끝으로 이동
+
     }
 
-    public static void show(Context context, EditText editText) {
+    private void removeStyleFromSelectedText(EditText editText, Class<?> spanClass) {
+        Spannable spannable = editText.getText();
+        StyleSpan[] spans = spannable.getSpans(0, editText.getText().toString().length(), StyleSpan.class);
+
+        for (StyleSpan span : spans) {
+            if (spanClass.isInstance(span)) {
+                spannable.removeSpan(span);
+            }
+        }
+
+        editText.setText(spannable);
+        editText.setSelection(editText.getText().toString().length()); // 커서를 끝으로 이동
+    }
+
+    public static void show_font_dialog(Context context, EditText editText) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_font, null);
 
@@ -200,6 +229,9 @@ public class DiaryActivity extends BaseActivity {
                 .setNegativeButton("취소", null)
                 .show();
     }
+
+
+
 
     private static void changeFont(EditText editText, String fontName) {
         Typeface typeface = Typeface.create(fontName, Typeface.NORMAL);

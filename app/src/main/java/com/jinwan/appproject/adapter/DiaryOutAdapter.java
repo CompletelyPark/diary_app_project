@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.list.DiaryEntry;
 import com.jinwan.appproject.list.Diary_out;
 
 import java.util.List;
 
 public class DiaryOutAdapter extends RecyclerView.Adapter<DiaryOutAdapter.DiaryOutViewHolder> {
-    private final List<Diary_out> diary_outlist;
+    private final List<DiaryEntry> diaryEntryList;
 
-    public DiaryOutAdapter(List<Diary_out> diaryOutlist) {
-        diary_outlist = diaryOutlist;
+    public DiaryOutAdapter(List<DiaryEntry> diaryEntryList) {
+        this.diaryEntryList = diaryEntryList;
     }
 
     @NonNull @Override
@@ -29,21 +30,22 @@ public class DiaryOutAdapter extends RecyclerView.Adapter<DiaryOutAdapter.DiaryO
 
     @Override
     public void onBindViewHolder(@NonNull DiaryOutViewHolder holder, int position) {
-        Diary_out diary_out = diary_outlist.get(position);
+        DiaryEntry diaryEntry = diaryEntryList.get(position);
         holder.imageView_article.setImageDrawable(holder.itemView.getContext().getResources().getDrawable(R.drawable.article_48px));
-        holder.title_diary.setText(diary_out.getTitle());
-        holder.imageView_icon.setImageResource(diary_out.getImageId());
+        holder.title_diary.setText(diaryEntry.getTitle());
+        holder.imageView_icon.setImageResource(diaryEntry.getWeatherIcon());
 
     }
 
     @Override
     public int getItemCount() {
-        return diary_outlist.size();
+        return diaryEntryList.size();
     }
 
 //  recyclerview 를 사용할 때마다 값을 새로 넣는게 아니라 그냥 값 자체를 추가하는 방식으로 하자
-    public void addItem(Diary_out diary_out){
-        diary_outlist.add(diary_out);
+    public void addItem(DiaryEntry diaryEntry_List){
+
+        diaryEntryList.add(diaryEntry_List);
     }
 
     public static class DiaryOutViewHolder extends RecyclerView.ViewHolder{
@@ -59,6 +61,5 @@ public class DiaryOutAdapter extends RecyclerView.Adapter<DiaryOutAdapter.DiaryO
         }
     }
 
-    //어탭터의 데이타를 추가하는 메서드
 
 }

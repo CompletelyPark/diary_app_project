@@ -19,6 +19,7 @@ import com.jinwan.appproject.fragment.MainFragment;
 import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.helper.DateHelper;
+import com.jinwan.appproject.list.DiaryEntry;
 import com.jinwan.appproject.list.Diary_out;
 
 public class MainActivity extends BaseActivity {
@@ -31,6 +32,9 @@ public class MainActivity extends BaseActivity {
     CalendarFragment calendarFragment;
     DiaryFragment diaryFragment;
     DailyFragment dailyFragment;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +103,6 @@ public class MainActivity extends BaseActivity {
         istheme = true;
         loadFragment(fragment);
     }
-
     // Fragment load method
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -126,9 +129,10 @@ public class MainActivity extends BaseActivity {
             if( resultCode == RESULT_OK){
                 //Fragment가 null이 아닌것을 확인하고 필요한 정보를 설정해야 한다.\
                 if( data != null) {
-                    Diary_out new_diary_out = (Diary_out) data.getSerializableExtra("new_diary_out");
+                    DiaryEntry new_diaryEntry = (DiaryEntry) data.getSerializableExtra("new_diaryEntry");
+//                    Diary_out new_diary_out = (Diary_out) data.getSerializableExtra("new_diary_out");
                     if( diaryFragment != null) {
-                        diaryFragment.diaryOutAdapter.addItem(new_diary_out);
+                        diaryFragment.diaryOutAdapter.addItem(new_diaryEntry);
                         diaryFragment.diaryOutAdapter.notifyDataSetChanged();
                     }
                 }
