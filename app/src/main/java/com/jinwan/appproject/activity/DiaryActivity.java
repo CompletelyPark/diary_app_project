@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,16 +36,13 @@ public class DiaryActivity extends BaseActivity {
     private boolean isItalic = false;
     private int weatherCnt = 0;
     private int imageWeather = R.drawable.sunny_48px;
-    DiaryOutDatabaseHelper diaryOutDatabaseHelper;
     DiaryDatabaseHelper diaryDatabaseHelper;
 
-    private static String[] fontList = {"Roboto", "sans-serif", "serif", "monospace", "sans-serif-light"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_diary);
-
         title_text = findViewById(R.id.title_text);
         daily_diary_text = findViewById(R.id.daily_diary_text);
 
@@ -53,11 +53,12 @@ public class DiaryActivity extends BaseActivity {
 
         Button btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(view -> {
+            String fontname =  (String) daily_diary_text.getTag();
             DiaryEntry diaryEntry = new DiaryEntry(
                     0,
                     title_text.getText().toString(),
                     daily_diary_text.getText().toString(),
-                    daily_diary_text.getTypeface().toString(),
+                    fontname,
                     (int) daily_diary_text.getTextSize(),
                     isBold,    // BOLD 여부 확인
                     isItalic,  // ITALIC 여부 확인
@@ -101,10 +102,6 @@ public class DiaryActivity extends BaseActivity {
                     removeStyleFromSelectedText(daily_diary_text, StyleSpan.class);
                     isItalic = false;
                 }
-                return true;
-            }
-            else if (item.getItemId()==R.id.text_color) {
-
                 return true;
             }
             else if (item.getItemId()==R.id.text_align) {
@@ -210,22 +207,74 @@ public class DiaryActivity extends BaseActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_font, null);
 
-        TextView[] fontViews = {
-                dialogView.findViewById(R.id.font1),
-                dialogView.findViewById(R.id.font2),
-                dialogView.findViewById(R.id.font3),
-                dialogView.findViewById(R.id.font4),
-                dialogView.findViewById(R.id.font5)
-        };
+        TextView fontView1 = dialogView.findViewById(R.id.font1);
+        TextView fontView2 = dialogView.findViewById(R.id.font2);
+        TextView fontView3 = dialogView.findViewById(R.id.font3);
+        TextView fontView4 = dialogView.findViewById(R.id.font4);
+        TextView fontView5= dialogView.findViewById(R.id.font5);
+        TextView fontView6= dialogView.findViewById(R.id.font6);
+        TextView fontView7= dialogView.findViewById(R.id.font7);
 
-        for (int i = 0; i < fontViews.length; i++) {
-            final int index = i;
-            fontViews[i].setOnClickListener(view -> changeFont(editText, fontList[index]));
-        }
+        Typeface font1 = ResourcesCompat.getFont(context, R.font.roboto);
+        Typeface font2 = ResourcesCompat.getFont(context, R.font.bazzi);
+        Typeface font3 = ResourcesCompat.getFont(context, R.font.dnfforgedblade_light);
+        Typeface font4 = ResourcesCompat.getFont(context, R.font.mabinogi_classic);
+        Typeface font5 = ResourcesCompat.getFont(context, R.font.maplestory_light);
+        Typeface font6 = ResourcesCompat.getFont(context, R.font.nexon_kart_gothic_medium);
+        Typeface font7 = ResourcesCompat.getFont(context, R.font.nexon_lv2_gothic);
+
+
+
+        fontView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font1,"roboto");
+            }
+        });
+        fontView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font2,"bazzi");
+            }
+        });
+        fontView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font3,"dnfforgedblade_light");
+            }
+        });
+        fontView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font4,"mabinogi_classic");
+            }
+        });
+        fontView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font5,"maplestory_light");
+            }
+        });
+        fontView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font6,"nexon_kart_gothic_medium");
+            }
+        });
+        fontView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFont(editText,font7,"nexon_lv2_gothic");
+            }
+        });
+
 
         builder.setTitle("글꼴 선택")
                 .setView(dialogView)
-                .setPositiveButton("확인", (dialogInterface, i) -> {})
+                .setPositiveButton("확인",  (dialogInterface, i) -> {
+
+
+                })
                 .setNegativeButton("취소", null)
                 .show();
     }
@@ -233,8 +282,9 @@ public class DiaryActivity extends BaseActivity {
 
 
 
-    private static void changeFont(EditText editText, String fontName) {
-        Typeface typeface = Typeface.create(fontName, Typeface.NORMAL);
+    private static void changeFont(EditText editText, Typeface font,String fontname) {
+        Typeface typeface = Typeface.create(font, Typeface.NORMAL);
         editText.setTypeface(typeface);
+        editText.setTag(fontname);
     }
 }

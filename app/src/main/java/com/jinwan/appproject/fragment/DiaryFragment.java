@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -105,11 +106,20 @@ public class DiaryFragment extends Fragment {
         ImageView imageView_weather_icon = dialogView.findViewById(R.id.imageView_weather_icon);
         dialog_title_text.setText(recent_title);
         dialog_content_text.setText(recent_content);
-//        dialog_content_text
-        dialog_content_text.setTextSize(recent_fontSize);
-        if(!recent_isBold) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.BOLD));
-        if(!recent_isItalic) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.ITALIC));
         imageView_weather_icon.setImageResource(recent_weatherIcon);
+
+        Typeface typeface = getTypefaceByFontName(recent_font);
+
+        dialog_content_text.setTextSize(recent_fontSize);
+
+// 가져온 Typeface 객체를 EditText에 적용
+        if (typeface != null) {
+            applyStyleToSelectedText(dialog_content_text,typeface);
+        }
+
+
+        if(recent_isBold) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.BOLD));
+        if(recent_isItalic) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.ITALIC));
 
         builder.setPositiveButton("수정",(dialogInterface, i) -> {
             String updated_title = dialog_title_text.getText().toString();
@@ -135,10 +145,31 @@ public class DiaryFragment extends Fragment {
         builder.show();
     }
 
+    private Typeface getTypefaceByFontName(String fontName) {
+        switch (fontName) {
+            case "roboto":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.roboto);
+            case "bazzi":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.bazzi);
+            case "dnfforgedblade_light":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.dnfforgedblade_light);
+            case "mabinogi_classic":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.mabinogi_classic);
+            case "maplestory_light":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.maplestory_light);
+            case "nexon_kart_gothic_medium":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.nexon_kart_gothic_medium);
+            case "nexon_lv2_gothic":
+                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.nexon_lv2_gothic);
+            default:
+                return null;
+        }
+    }
+
     private void showDeleteDialog(DiaryEntry diaryEntry){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         builder.setTitle("삭제 확인");
-        builder.setMessage("이 미션을 삭제하시겠습니까?");
+        builder.setMessage("이 일기를 삭제하시겠습니까?");
         builder.setPositiveButton("삭제", (dialogInterface, i) -> {
             // 데이터베이스에서 미션 삭제
             diaryDatabaseHelper.deleteDiaryEntry(diaryEntry);

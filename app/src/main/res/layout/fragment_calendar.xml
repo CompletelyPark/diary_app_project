@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,63 +19,51 @@
         />
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
 
-<!--        <com.google.android.material.button.MaterialButtonToggleGroup-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:id="@+id/toggleButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:singleSelection="true"-->
-<!--            >-->
-<!--            <Button-->
-<!--                style="?attr/materialButtonOutlinedStyle"-->
-<!--                android:id="@+id/btn_schedule"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="일정"-->
-<!--                />-->
-<!--            <Button-->
-<!--                style="?attr/materialButtonOutlinedStyle"-->
-<!--                android:id="@+id/btn_celebrity"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="기념일"-->
-<!--                />-->
-<!--        </com.google.android.material.button.MaterialButtonToggleGroup>-->
+        >
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton"
             android:id="@+id/btn_schedule"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="5dp"
             android:text="일정"
-            android:textSize="18sp"
             android:textColor="?attr/colorPrimary"
-            />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Material3.Button.TextButton"
             android:id="@+id/btn_celebrity"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="기념일"
-            android:textSize="18sp"
             android:textColor="?attr/colorPrimary"
-            />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_schedule"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.button.MaterialButton
-            android:gravity="center"
-            android:layout_gravity="center"
-            style="?attr/materialIconButtonStyle"
             android:id="@+id/btn_open_close"
+            style="?attr/materialIconButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:contentDescription="calendar open close"
             app:icon="@drawable/arrow_downward_24px"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:padding="16dp"
         android:id="@+id/recyclerView_schedule"

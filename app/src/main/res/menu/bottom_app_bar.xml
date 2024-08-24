@@ -34,14 +34,6 @@
         />
 
     <item
-        android:id="@+id/text_color"
-        android:icon="@drawable/text_format_48px"
-        android:title="text_underline"
-        android:contentDescription="text set underline"
-        app:showAsAction="always"
-        />
-
-    <item
         android:id="@+id/text_align"
         android:icon="@drawable/format_align_left_48px"
         android:title="text_align"

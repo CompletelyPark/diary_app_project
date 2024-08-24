@@ -342,7 +342,7 @@ public class CalendarFragment extends Fragment {
     private void showDeleteDialogSchedule(Schedule schedule){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         builder.setTitle("삭제 확인");
-        builder.setMessage("이 미션을 삭제하시겠습니까?");
+        builder.setMessage("해당 기념일을 삭제하시겠습니까?");
         builder.setPositiveButton("삭제", (dialogInterface, i) -> {
             // 데이터베이스에서 미션 삭제
             scheduleDatabaseHelper.deleteSchedule(schedule.getId());
