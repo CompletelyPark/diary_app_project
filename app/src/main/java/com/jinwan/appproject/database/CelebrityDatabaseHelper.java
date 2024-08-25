@@ -18,14 +18,11 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "celebrities.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String TABLE_NAME = "celebrities";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_MEMO = "memo";
     private static final String COLUMN_SELECTED_DATE = "selected_date";
-
     private static final String COLUMN_DATE = "date";
-
     public CelebrityDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -77,34 +74,6 @@ public class CelebrityDatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
-
-    // 특정 날짜의 모든 기념일을 불러올 때 ID도 포함
-//    public List<Celebrity> getCelebritiesByDate(String date) {
-//        List<Celebrity> celebrities = new ArrayList<>();
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.query(TABLE_NAME, new String[]{
-//                COLUMN_ID,
-//                COLUMN_MEMO,
-//                COLUMN_SELECTED_DATE,
-//                },
-//                COLUMN_DATE + "=?", new String[]{date}, null, null, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                Celebrity celebrity = new Celebrity(
-//                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)), // ID 추가
-//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEMO)),
-//                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SELECTED_DATE))
-//                );
-//                celebrities.add(celebrity);
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        db.close();
-//
-//        return celebrities;
-//    }
 
     public List<Celebrity> getCelebritiesForTodayAndTomorrow() {
         List<Celebrity> celebrities = new ArrayList<>();

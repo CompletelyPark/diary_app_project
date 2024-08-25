@@ -46,9 +46,8 @@ public class DailyFragment extends Fragment {
             FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
             floatingActionButton.setOnClickListener(v -> show());
 
-            // DatePicker 버튼 설정
-            Button datePickerButton = view.findViewById(R.id.date_picker_button);
-            datePickerButton.setOnClickListener(v -> showDatePicker());
+            FloatingActionButton floatingDateRange = view.findViewById(R.id.floating_date_range);
+            floatingDateRange.setOnClickListener(v -> showDatePicker());
 
             // RecyclerView 초기화
             missionlist = dbHelper.getMissionsByDate(getFormattedDate(selectedDate));

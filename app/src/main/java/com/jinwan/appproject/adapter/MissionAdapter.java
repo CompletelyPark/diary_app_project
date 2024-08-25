@@ -33,6 +33,11 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionV
         holder.timeLast2.setText(mission1.getTimeLast2());
     }
 
+
+    public void addItem(Mission mission){
+        this.mission.add(mission);
+    }
+
     @Override
     public int getItemCount() {
         return mission.size();

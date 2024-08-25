@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.jinwan.appproject.list.DiaryEntry;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DiaryDatabaseHelper extends SQLiteOpenHelper {
@@ -26,6 +27,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_IS_BOLD = "is_bold";
     private static final String COLUMN_IS_ITALIC = "is_italic";
     private static final String COLUMN_WEATHER_ICON = "weather_icon";
+    private static final String COLUMN_DATE = "date";  // 날짜 컬럼 추가
 
     public DiaryDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,7 +43,8 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_FONT_SIZE + " INTEGER, "
                 + COLUMN_IS_BOLD + " INTEGER, "
                 + COLUMN_IS_ITALIC + " INTEGER, "
-                + COLUMN_WEATHER_ICON + " INTEGER)";
+                + COLUMN_WEATHER_ICON + " INTEGER,"
+                + COLUMN_DATE + " INTEGER)";  // 날짜 컬럼 추가
         db.execSQL(CREATE_DIARY_TABLE);
     }
 
@@ -63,6 +66,8 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_IS_BOLD, diaryEntry.isBold() ? 1 : 0);
         values.put(COLUMN_IS_ITALIC, diaryEntry.isItalic() ? 1 : 0);
         values.put(COLUMN_WEATHER_ICON, diaryEntry.getWeatherIcon());
+        values.put(COLUMN_DATE, diaryEntry.getDate().getTime());
+
 
         db.insert(TABLE_DIARY, null, values);
         db.close();
@@ -90,7 +95,8 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                 cursor.getInt(4),
                 cursor.getInt(5) == 1,
                 cursor.getInt(6) == 1,
-                cursor.getInt(7)
+                cursor.getInt(7),
+                new Date(cursor.getLong(8))
         );
 
         cursor.close();
@@ -111,7 +117,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_IS_BOLD, diaryEntry.isBold() ? 1 : 0);
         values.put(COLUMN_IS_ITALIC, diaryEntry.isItalic() ? 1 : 0);
         values.put(COLUMN_WEATHER_ICON, diaryEntry.getWeatherIcon());
-
+        values.put(COLUMN_DATE, diaryEntry.getDate().getTime());
         return db.update(TABLE_DIARY, values, COLUMN_ID + " = ?",
                 new String[] { String.valueOf(id) });
     }
@@ -142,8 +148,8 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                         cursor.getInt(4),
                         cursor.getInt(5) == 1,
                         cursor.getInt(6) == 1,
-                        cursor.getInt(7)
-
+                        cursor.getInt(7),
+                        new Date(cursor.getLong(8))
                 );
                 diaryEntries.add(diaryEntry);
             } while (cursor.moveToNext());

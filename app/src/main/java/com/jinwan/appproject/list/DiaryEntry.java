@@ -1,6 +1,7 @@
 package com.jinwan.appproject.list;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class DiaryEntry implements Serializable {
     private int id;
@@ -11,9 +12,11 @@ public class DiaryEntry implements Serializable {
     private boolean isBold;
     private boolean isItalic;
     private int weatherIcon;
+    private Date date;
+
 
     public DiaryEntry(int id, String title, String content, String font, int fontSize,
-                      boolean isBold, boolean isItalic, int weatherIcon) {
+                      boolean isBold, boolean isItalic, int weatherIcon, Date date) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -22,28 +25,9 @@ public class DiaryEntry implements Serializable {
         this.isBold = isBold;
         this.isItalic = isItalic;
         this.weatherIcon = weatherIcon;
+        this.date = date;
     }
 
-    public DiaryEntry(String title, String content, String font, int fontSize, boolean isBold, boolean isItalic, int weatherIcon) {
-        this.title = title;
-        this.content = content;
-        this.font = font;
-        this.fontSize = fontSize;
-        this.isBold = isBold;
-        this.isItalic = isItalic;
-        this.weatherIcon = weatherIcon;
-    }
-
-    public DiaryEntry(int id, String title, int weatherIcon) {
-        this.id = id;
-        this.weatherIcon = weatherIcon;
-        this.title = title;
-    }
-
-    public DiaryEntry(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
 
     // Getter와 Setter 메서드
     public int getId() {
@@ -109,5 +93,13 @@ public class DiaryEntry implements Serializable {
 
     public void setWeatherIcon(int weatherIcon) {
         this.weatherIcon = weatherIcon;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

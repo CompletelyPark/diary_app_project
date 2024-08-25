@@ -57,7 +57,6 @@ public class CalendarFragment extends Fragment {
     private long selectedDate; // 선택한 날짜를 저장할 변수
     private Calendar calendar_selectedDate; // 선택된 날짜
 
-    private Calendar todayDate;
     private ScheduleDatabaseHelper scheduleDatabaseHelper;
     private CelebrityDatabaseHelper celebrityDatabaseHelper;
 
@@ -272,8 +271,8 @@ public class CalendarFragment extends Fragment {
         SaturdayDecorator saturdayDecorator = new SaturdayDecorator();
         TodayDecorator todayDecorator = new TodayDecorator(getContext());
 
-        CustomCalendarDecorator decorator = new CustomCalendarDecorator(getContext());
-        materialCalendarView.addDecorator(decorator);
+//        CustomCalendarDecorator decorator = new CustomCalendarDecorator(getContext());
+//        materialCalendarView.addDecorator(decorator);
 
         materialCalendarView.addDecorator(saturdayDecorator);
         materialCalendarView.addDecorator(sundayDecorator);
@@ -289,7 +288,7 @@ public class CalendarFragment extends Fragment {
 //      다이얼로그 뷰 생성
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_schedule, null);
-        builder.setTitle("일정 수정");
+        builder.setTitle("일정 확인");
         builder.setView(dialogView);
 
 //      변수 선언

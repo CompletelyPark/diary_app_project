@@ -50,24 +50,16 @@
 
     <LinearLayout
         android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-s
-        <TextView
-            android:gravity="center"
-            android:id="@+id/day_diary"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="6dp"
-            android:text="Day" />
 
         <TextView
-            android:gravity="center"
-            android:id="@+id/time_diary"
+            android:id="@+id/diary_day_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="6dp"
-            android:text="Time" />
+            android:textSize="20sp"
+            android:text="Day" />
 
     </LinearLayout>
 

@@ -38,6 +38,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.timeLast.setText(schedule.getTimeLast());
     }
 
+    public void addItem(Schedule schedule){
+        scheduleList.add(schedule);
+    }
+
     @Override
     public int getItemCount() {
         return scheduleList.size();

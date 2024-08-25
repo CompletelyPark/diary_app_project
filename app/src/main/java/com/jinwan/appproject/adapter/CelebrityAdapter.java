@@ -35,6 +35,10 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
         holder.celebrityDay.setText(celebrity.getDate());
     }
 
+    public void addItem(Celebrity celebrity){
+        celebrities.add(celebrity);
+    }
+
     @Override
     public int getItemCount() {
         return celebrities.size();

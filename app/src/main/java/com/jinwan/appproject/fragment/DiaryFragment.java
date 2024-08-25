@@ -1,18 +1,15 @@
 package com.jinwan.appproject.fragment;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,37 +18,34 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.activity.MainActivity;
-import com.jinwan.appproject.adapter.DiaryOutAdapter;
+import com.jinwan.appproject.adapter.DiaryAdapter;
 import com.jinwan.appproject.adapter.RecyclerItemClickListener;
 import com.jinwan.appproject.database.DiaryDatabaseHelper;
 import com.jinwan.appproject.list.DiaryEntry;
-import com.jinwan.appproject.list.Mission;
 
+import java.util.Date;
 import java.util.List;
 
 public class DiaryFragment extends Fragment {
 
-    public DiaryOutAdapter diaryOutAdapter;
+    public DiaryAdapter diaryAdapter;
     private List<DiaryEntry> diaryEntryList;
     private DiaryDatabaseHelper diaryDatabaseHelper;
-
     private RecyclerView recyclerView_diary;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_daily_diary, container, false);
-
-//        diaryOutDatabaseHelper = new DiaryOutDatabaseHelper(getContext());
         diaryDatabaseHelper = new DiaryDatabaseHelper(getContext());
 
 //      recyclerview 선언 및 초기화
         diaryEntryList = diaryDatabaseHelper.getAllDiaryEntries();
 
-        diaryOutAdapter =new DiaryOutAdapter(diaryEntryList);
+        diaryAdapter =new DiaryAdapter(diaryEntryList);
         recyclerView_diary = view.findViewById(R.id.recyclerView_diary);
         recyclerView_diary.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView_diary.setAdapter(diaryOutAdapter);
+        recyclerView_diary.setAdapter(diaryAdapter);
         recyclerView_diary.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(),
                         recyclerView_diary, new RecyclerItemClickListener.OnItemClickListener() {
@@ -59,14 +53,7 @@ public class DiaryFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 // 아이템 클릭 시 수정 다이얼로그 표시
                 showEditDialog(diaryEntryList.get(position));
-//                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
-//                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_diary_content,null);
-//                builder.setTitle("내용 확인");
-//                builder.setView(dialogView);
-//                DiaryEntry diaryEntry1 = diaryDatabaseHelper.getDiaryEntry(position);
 
-//                EditText dialog_title_text = dialogView.findViewById(R.id.dialog_title_text);
-//                EditText dialog_content_text = dialogView.findViewById(R.id.dialog_content_text);
             }
 
             @Override
@@ -101,6 +88,7 @@ public class DiaryFragment extends Fragment {
         boolean recent_isBold = diaryEntry.isBold();
         boolean recent_isItalic = diaryEntry.isItalic();
         int recent_weatherIcon = diaryEntry.getWeatherIcon();
+        Date recent_date = diaryEntry.getDate();
         EditText dialog_title_text = dialogView.findViewById(R.id.dialog_title_text);
         EditText dialog_content_text = dialogView.findViewById(R.id.dialog_content_text);
         ImageView imageView_weather_icon = dialogView.findViewById(R.id.imageView_weather_icon);
@@ -108,14 +96,9 @@ public class DiaryFragment extends Fragment {
         dialog_content_text.setText(recent_content);
         imageView_weather_icon.setImageResource(recent_weatherIcon);
 
-        Typeface typeface = getTypefaceByFontName(recent_font);
 
         dialog_content_text.setTextSize(recent_fontSize);
 
-// 가져온 Typeface 객체를 EditText에 적용
-        if (typeface != null) {
-            applyStyleToSelectedText(dialog_content_text,typeface);
-        }
 
 
         if(recent_isBold) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.BOLD));
@@ -129,7 +112,7 @@ public class DiaryFragment extends Fragment {
                     updated_title,updated_content,
                     recent_font,recent_fontSize,
                     recent_isBold,recent_isItalic,
-                    recent_weatherIcon
+                    recent_weatherIcon,recent_date
                     );
 
             // 데이터베이스 업데이트
@@ -137,33 +120,11 @@ public class DiaryFragment extends Fragment {
 
             // 리스트 업데이트
             diaryEntryList.set(diaryEntryList.indexOf(diaryEntry), updatedDiaryEntry);
-            diaryOutAdapter.notifyDataSetChanged();
+            diaryAdapter.notifyDataSetChanged();
         });
 
 
-
         builder.show();
-    }
-
-    private Typeface getTypefaceByFontName(String fontName) {
-        switch (fontName) {
-            case "roboto":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.roboto);
-            case "bazzi":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.bazzi);
-            case "dnfforgedblade_light":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.dnfforgedblade_light);
-            case "mabinogi_classic":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.mabinogi_classic);
-            case "maplestory_light":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.maplestory_light);
-            case "nexon_kart_gothic_medium":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.nexon_kart_gothic_medium);
-            case "nexon_lv2_gothic":
-                return ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.nexon_lv2_gothic);
-            default:
-                return null;
-        }
     }
 
     private void showDeleteDialog(DiaryEntry diaryEntry){
@@ -175,7 +136,7 @@ public class DiaryFragment extends Fragment {
             diaryDatabaseHelper.deleteDiaryEntry(diaryEntry);
             // 리스트에서 제거
             diaryEntryList.remove(diaryEntry);
-            diaryOutAdapter.notifyDataSetChanged();
+            diaryAdapter.notifyDataSetChanged();
         });
         builder.setNegativeButton("취소", null);
         builder.show();

@@ -28,7 +28,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="409dp"
         android:layout_height="665dp"
         android:padding="10dp"
@@ -40,44 +40,51 @@
         android:orientation="vertical"
         app:layout_constraintVertical_bias="0.5">
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="theme1"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.601" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="theme2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center|bottom"
+            >
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="theme3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button4"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageButton
+                android:id="@+id/button1"
+                android:layout_width="190dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ffffff" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="theme4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="190dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/c2ffc2e" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center|top"
+            >
+
+            <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="190dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/b59df7" />
+
+            <ImageButton
+                android:id="@+id/button4"
+                android:layout_width="190dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ffde3f" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

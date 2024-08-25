@@ -16,9 +16,7 @@ public class CustomCalendarDecorator implements DayViewDecorator {
     public CustomCalendarDecorator(Context context) {
         // 색상 속성 가져오기
         int backgroundColor = getColorFromAttr(context, androidx.appcompat.R.attr.colorPrimary);
-        int dayTextColor = getColorFromAttr(context, com.google.android.material.R.attr.colorOnPrimary);
         weekdayTextColor = getColorFromAttr(context, com.google.android.material.R.attr.colorOnPrimary);
-        Drawable backgroundDrawable = new ColorDrawable(backgroundColor);
     }
 
     private int getColorFromAttr(Context context, int attr) {
@@ -35,14 +33,6 @@ public class CustomCalendarDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        // 배경 색상 설정
-//        view.setBackgroundDrawable(backgroundDrawable);
-        // 날짜 텍스트 색상 설정
-        // view.addSpan(new ForegroundColorSpan(dayTextColor));
     }
 
-    public void decorateWeekday(DayViewFacade view) {
-        // 요일 텍스트 색상 설정
-        view.addSpan(new ForegroundColorSpan(weekdayTextColor));
-    }
 }

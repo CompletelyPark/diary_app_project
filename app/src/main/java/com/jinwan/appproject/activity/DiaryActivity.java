@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,16 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jinwan.appproject.R;
 import com.jinwan.appproject.database.DiaryDatabaseHelper;
-import com.jinwan.appproject.database.DiaryOutDatabaseHelper;
+import com.jinwan.appproject.helper.ThemeHelper;
 import com.jinwan.appproject.list.DiaryEntry;
-
+import java.util.Date;
 
 public class DiaryActivity extends BaseActivity {
 
@@ -41,6 +39,7 @@ public class DiaryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeHelper.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_diary);
         title_text = findViewById(R.id.title_text);
@@ -50,6 +49,7 @@ public class DiaryActivity extends BaseActivity {
         diaryDatabaseHelper = new DiaryDatabaseHelper(getApplicationContext());
         Button button = findViewById(R.id.btn_back);
         button.setOnClickListener(view -> finish());
+        Date currentDate = new Date();
 
         Button btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(view -> {
@@ -62,8 +62,11 @@ public class DiaryActivity extends BaseActivity {
                     (int) daily_diary_text.getTextSize(),
                     isBold,    // BOLD 여부 확인
                     isItalic,  // ITALIC 여부 확인
-                    imageWeather
+                    imageWeather,
+                    currentDate
             );
+
+
             diaryDatabaseHelper.addDiaryEntry(diaryEntry);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("new_diaryEntry", diaryEntry);

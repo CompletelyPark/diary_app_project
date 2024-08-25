@@ -20,7 +20,6 @@ import com.jinwan.appproject.fragment.DailyFragment;
 import com.jinwan.appproject.fragment.DiaryFragment;
 import com.jinwan.appproject.helper.DateHelper;
 import com.jinwan.appproject.list.DiaryEntry;
-import com.jinwan.appproject.list.Diary_out;
 
 public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
@@ -32,9 +31,6 @@ public class MainActivity extends BaseActivity {
     CalendarFragment calendarFragment;
     DiaryFragment diaryFragment;
     DailyFragment dailyFragment;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +128,8 @@ public class MainActivity extends BaseActivity {
                     DiaryEntry new_diaryEntry = (DiaryEntry) data.getSerializableExtra("new_diaryEntry");
 //                    Diary_out new_diary_out = (Diary_out) data.getSerializableExtra("new_diary_out");
                     if( diaryFragment != null) {
-                        diaryFragment.diaryOutAdapter.addItem(new_diaryEntry);
-                        diaryFragment.diaryOutAdapter.notifyDataSetChanged();
+                        diaryFragment.diaryAdapter.addItem(new_diaryEntry);
+                        diaryFragment.diaryAdapter.notifyDataSetChanged();
                     }
                 }
             }
