@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,22 @@ public class LockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lock);
 
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        Button lock_open = findViewById(R.id.lock_open);
+        lock_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showUnlockDialog();
+            }
+        });
+
+        Button setting = findViewById(R.id.lock_setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSetPasswordDialog();
+            }
+        });
 
         // 이미 비밀번호가 설정되어 있는지 확인
         if (isPasswordSet()) {
@@ -70,13 +88,13 @@ public class LockActivity extends AppCompatActivity {
 
     private void showUnlockDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-        builder.setTitle("Enter password");
+        builder.setTitle("패스워드 입력");
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
 
-        builder.setPositiveButton("Unlock", (dialog, which) -> {
+        builder.setPositiveButton("확인", (dialog, which) -> {
             String password = input.getText().toString();
             if (password.equals(getPassword())) {
                 dialog.dismiss();
@@ -88,7 +106,7 @@ public class LockActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.setNegativeButton("취소", (dialog, which) -> dialog.cancel());
 
         builder.show();
     }

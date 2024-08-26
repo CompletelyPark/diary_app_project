@@ -35,8 +35,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent lockIntent = new Intent(this, LockActivity.class);
-        startActivity(lockIntent);
+//        Intent lockIntent = new Intent(this, LockActivity.class);
+//        startActivity(lockIntent);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
