@@ -20,7 +20,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
-        android:background="?attr/colorSecondaryContainer"
+        android:background="?attr/colorTertiaryContainer"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="달력"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorOnTertiaryContainer"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="일일"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorOnTertiaryContainer"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="일기"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorOnTertiaryContainer"
             android:background="@android:color/transparent"
             android:textSize="18sp" />
     </LinearLayout>

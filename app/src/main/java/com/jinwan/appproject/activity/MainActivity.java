@@ -35,6 +35,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent lockIntent = new Intent(this, LockActivity.class);
+        startActivity(lockIntent);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -65,7 +67,26 @@ public class MainActivity extends BaseActivity {
         btn_diary.setOnClickListener(v -> {
             loadFragmentWithHomeCheck(diaryFragment);
         });
+
+
+
+
     }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        // 앱이 포그라운드로 돌아올 때 잠금 화면 표시
+//        Intent lockIntent = new Intent(this, LockActivity.class);
+//        startActivity(lockIntent);
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        // 다른 설정이 필요한 경우 작성
+//    }
+
 
     // 툴바 메뉴 활성화 method
     @Override
@@ -89,6 +110,11 @@ public class MainActivity extends BaseActivity {
             ishome = false;
             istheme = true;
             loadFragment(new MainFragment());
+        }
+        else if(item.getItemId() == R.id.action_lock && ishome){
+            ishome = false;
+            Intent lockIntent = new Intent(this, LockActivity.class);
+            startActivity(lockIntent);
         }
         return super.onOptionsItemSelected(item);
     }
