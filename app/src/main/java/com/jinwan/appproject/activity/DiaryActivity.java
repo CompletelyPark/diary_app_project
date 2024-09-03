@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -47,15 +48,51 @@ public class DiaryActivity extends BaseActivity {
 
 //        diaryOutDatabaseHelper = new DiaryOutDatabaseHelper(getApplicationContext());
         diaryDatabaseHelper = new DiaryDatabaseHelper(getApplicationContext());
-        Button button = findViewById(R.id.btn_back);
-        button.setOnClickListener(view -> finish());
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(view -> finish());
+
+        Intent intent = getIntent();
+        DiaryEntry diaryEntry1 = (DiaryEntry) intent.getSerializableExtra("diaryEntry");
+
+        if (diaryEntry1!=null){
+
+            title_text.setText(diaryEntry1.getTitle());
+            daily_diary_text.setText(diaryEntry1.getContent());
+
+            String str1 = String.valueOf(title_text.getText());
+            String str2 = String.valueOf(daily_diary_text.getText());
+            Log.d("Tag",str1);
+            Log.d("Tag",str2);
+
+            daily_diary_text.setTextSize(diaryEntry1.getFontSize());
+            isBold = diaryEntry1.isBold();
+            isItalic = diaryEntry1.isItalic();
+            imageWeather = diaryEntry1.getWeatherIcon();
+
+            if (isBold) {
+                applyStyleToSelectedText(daily_diary_text, new StyleSpan(Typeface.BOLD));
+            }
+            if (isItalic) {
+                applyStyleToSelectedText(daily_diary_text, new StyleSpan(Typeface.ITALIC));
+            }
+
+            daily_diary_text.setTag(diaryEntry1.getFont());
+            String fontName = diaryEntry1.getFont();
+            if (fontName != null) {
+                daily_diary_text.setTypeface(ResourcesCompat.getFont(this, getFontResourceId(fontName)));
+            }
+
+        }
+
         Date currentDate = new Date();
 
         Button btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(view -> {
-            String fontname =  (String) daily_diary_text.getTag();
+            String fontname = (String) daily_diary_text.getTag();
+            int entryId = diaryEntry1 != null ? diaryEntry1.getId() : 0;
+
             DiaryEntry diaryEntry = new DiaryEntry(
-                    0,
+                    entryId,  // 기존 DiaryEntry의 ID 유지
                     title_text.getText().toString(),
                     daily_diary_text.getText().toString(),
                     fontname,
@@ -66,10 +103,17 @@ public class DiaryActivity extends BaseActivity {
                     currentDate
             );
 
-
-            diaryDatabaseHelper.addDiaryEntry(diaryEntry);
             Intent resultIntent = new Intent();
-            resultIntent.putExtra("new_diaryEntry", diaryEntry);
+            if (diaryEntry1 != null) {
+                // 기존 엔트리 업데이트
+                diaryDatabaseHelper.updateDiaryEntry(diaryEntry1.getId(), diaryEntry);
+                resultIntent.putExtra("new_diaryEntry", diaryEntry);
+            } else {
+                // 새로운 엔트리 추가
+                diaryDatabaseHelper.addDiaryEntry(diaryEntry);
+                resultIntent.putExtra("new_diaryEntry", diaryEntry);
+            }
+
             setResult(RESULT_OK, resultIntent);
             finish();
         });
@@ -276,13 +320,37 @@ public class DiaryActivity extends BaseActivity {
                 .setView(dialogView)
                 .setPositiveButton("확인",  (dialogInterface, i) -> {
 
-
                 })
                 .setNegativeButton("취소", null)
                 .show();
     }
 
+    private int getFontResourceId(String fontName) {
+        if (fontName == null) {
+            // 기본 폰트를 설정하거나 적절한 조치를 취할 수 있습니다.
+            return R.font.roboto; // 기본값을 설정
+        }
 
+        switch (fontName) {
+            case "roboto":
+                return R.font.roboto;
+            case "bazzi":
+                return R.font.bazzi;
+            case "dnfforgedblade_light":
+                return R.font.dnfforgedblade_light;
+            case "mabinogi_classic":
+                return R.font.mabinogi_classic;
+            case "maplestory_light":
+                return R.font.maplestory_light;
+            case "nexon_kart_gothic_medium":
+                return R.font.nexon_kart_gothic_medium;
+            case "nexon_lv2_gothic":
+                return R.font.nexon_lv2_gothic;
+            default:
+                // 기본값을 설정
+                return R.font.roboto;
+        }
+    }
 
 
     private static void changeFont(EditText editText, Typeface font,String fontname) {

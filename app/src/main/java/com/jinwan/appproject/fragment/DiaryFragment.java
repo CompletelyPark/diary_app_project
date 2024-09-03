@@ -1,5 +1,7 @@
 package com.jinwan.appproject.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jinwan.appproject.R;
+import com.jinwan.appproject.activity.DiaryActivity;
 import com.jinwan.appproject.activity.MainActivity;
 import com.jinwan.appproject.adapter.DiaryAdapter;
 import com.jinwan.appproject.adapter.RecyclerItemClickListener;
@@ -52,8 +55,9 @@ public class DiaryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 // 아이템 클릭 시 수정 다이얼로그 표시
-                showEditDialog(diaryEntryList.get(position));
+//                showEditDialog(diaryEntryList.get(position));
 
+                editContent(diaryEntryList.get(position));
             }
 
             @Override
@@ -76,6 +80,35 @@ public class DiaryFragment extends Fragment {
         return view;
     }
 
+
+
+    private void editContent(DiaryEntry diaryEntry){
+        Intent intent = new Intent(getContext(), DiaryActivity.class);
+        intent.putExtra("diaryEntry",diaryEntry);
+        startActivityForResult(intent,300);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 300 && resultCode == Activity.RESULT_OK) {
+            // Intent에서 전달된 새로운 diaryEntry 데이터를 받아옴
+            DiaryEntry updatedDiaryEntry = (DiaryEntry) data.getSerializableExtra("new_diaryEntry");
+
+            // 기존 리스트에서 해당 entry의 위치를 찾고 업데이트
+            int position = diaryEntryList.indexOf(updatedDiaryEntry);
+            if (position != -1) {
+                diaryEntryList.set(position, updatedDiaryEntry);
+                diaryAdapter.notifyItemChanged(position);  // 어댑터에 변경 알림
+            }
+        }
+    }
+
+
+
+
     private void showEditDialog(DiaryEntry diaryEntry){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_diary_content,null);
@@ -95,11 +128,7 @@ public class DiaryFragment extends Fragment {
         dialog_title_text.setText(recent_title);
         dialog_content_text.setText(recent_content);
         imageView_weather_icon.setImageResource(recent_weatherIcon);
-
-
         dialog_content_text.setTextSize(recent_fontSize);
-
-
 
         if(recent_isBold) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.BOLD));
         if(recent_isItalic) applyStyleToSelectedText(dialog_content_text,new StyleSpan(Typeface.ITALIC));
